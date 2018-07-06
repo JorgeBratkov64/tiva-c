@@ -19,9 +19,33 @@ int main(void){
 
 	while(1){
 		
-		GPIO_PORTF_DATA_R |= 0x0E;
+		GPIO_PORTF_DATA_R |= 0x02;			/* Red	*/
 		SysTick_Wait(20);	
-		GPIO_PORTF_DATA_R &= 0x00;
+		GPIO_PORTF_DATA_R &= 0x00;			/* Off	*/
+		SysTick_Wait(10);
+		GPIO_PORTF_DATA_R |= 0x04;			/* Blue	*/
+		SysTick_Wait(20);	
+		GPIO_PORTF_DATA_R &= 0x00;			/* Off	*/
+		SysTick_Wait(10);
+		GPIO_PORTF_DATA_R |= 0x06;			/* Magenta	*/
+		SysTick_Wait(20);	
+		GPIO_PORTF_DATA_R &= 0x00;			/* Off	*/
+		SysTick_Wait(10);
+		GPIO_PORTF_DATA_R |= 0x08;			/* Green	*/
+		SysTick_Wait(20);	
+		GPIO_PORTF_DATA_R &= 0x00;			/* Off	*/
+		SysTick_Wait(10);
+		GPIO_PORTF_DATA_R |= 0x0A;			/* Yellow	*/
+		SysTick_Wait(20);	
+		GPIO_PORTF_DATA_R &= 0x00;			/* Off	*/
+		SysTick_Wait(10);
+		GPIO_PORTF_DATA_R |= 0x0C;			/* Cian	*/
+		SysTick_Wait(20);	
+		GPIO_PORTF_DATA_R &= 0x00;			/* Off	*/
+		SysTick_Wait(10);
+		GPIO_PORTF_DATA_R |= 0x0E;			/* White	*/
+		SysTick_Wait(20);	
+		GPIO_PORTF_DATA_R &= 0x00;			/* Off	*/
 		SysTick_Wait(10);
 	}
 	return 0;
