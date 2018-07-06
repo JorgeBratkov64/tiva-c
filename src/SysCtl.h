@@ -60,10 +60,8 @@
 /*  External routines defintion                                                         */
 /****************************************************************************************/
 
-void PLL_Init(void);
-void SysTick_Wait(unsigned long delay);
-
-
+extern void PLL_Init(void);
+extern void SysTick_Wait(unsigned long delay);
 
 
 #endif      /*  SYSCTL_H    */
