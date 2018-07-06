@@ -60,6 +60,12 @@
 /*  External routines defintion                                                         */
 /****************************************************************************************/
 
+extern void PortA_Init(void);
+extern void PortB_Init(void);
+extern void PortC_Init(void);
+extern void PortD_Init(void);
+extern void PortE_Init(void);
+extern void PortF_Init(void);
 
 
 #endif      /*  GPIOCFG_H    */
