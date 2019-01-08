@@ -10,7 +10,7 @@
 
 void PLL_Init(void);
 void PortF_Init(void);
-void SysTick_Wait();
+void SysTick_Wait(unsigned long);
 
 int main(void){
 	
@@ -48,7 +48,6 @@ int main(void){
 		GPIO_PORTF_DATA_R &= 0x00;			/* Off	*/
 		SysTick_Wait(10);
 	}
-	return 0;
 } 
 
 void PLL_Init(void){
