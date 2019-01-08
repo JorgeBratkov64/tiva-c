@@ -24,16 +24,16 @@ void LED_Init( void ){
 
 void RED_toggle(void){
 	GPIOF -> DATA |= RED_LED;					/* RED LED*/
-	delay(3000000);
+	delay(1000000);
 	GPIOF -> DATA &= 0;							/* OFF */
 	delay(500000);
 }
 
 void BLUE_toggle(void){
 	GPIOF -> DATA |= BLUE_LED;					/* BLUE_LED */
-	delay(3000000);
+	delay(10000000);
 	GPIOF -> DATA &= 0;							/* OFF */
-	delay(100000);
+	delay(500000);
 }
 
 void GREEN_toggle(void){
