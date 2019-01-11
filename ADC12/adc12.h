@@ -23,9 +23,9 @@
 #define ADC_AFSEL_AIN8	(1 << 5)	/* AIN8 -> PE5 */
 
 
-typedef uint8_t ADC_AFSEL_PORTB;
-typedef uint8_t ADC_AFSEL_PORTD;
-typedef uint8_t ADC_AFSEL_PORTE;
+typedef uint8_t ADC_AFSEL_PORTB_t;
+typedef uint8_t ADC_AFSEL_PORTD_t;
+typedef uint8_t ADC_AFSEL_PORTE_t;
 
 /* CLEAR DEN BITS FOR PORT B*/
 #define ADC_CLEAR_DEN_AIN10	~(1 << 4) 	/* AIN10 -> PB4 */
@@ -45,9 +45,9 @@ typedef uint8_t ADC_AFSEL_PORTE;
 #define ADC_CLEAR_DEN_AIN9	~(1 << 4)	/* AIN9 -> PE4 */
 #define ADC_CLEAR_DEN_AIN8	~(1 << 5)	/* AIN8 -> PE5 */
 
-typedef uint8_t ADC_CLEAR_DEN__PORTB;
-typedef uint8_t ADC_CLEAR_DEN__PORTD;
-typedef uint8_t ADC_CLEAR_DEN__PORTE;
+typedef uint8_t ADC_CLEAR_DEN_PORTB_t;
+typedef uint8_t ADC_CLEAR_DEN_PORTD_t;
+typedef uint8_t ADC_CLEAR_DEN_PORTE_t;
 
 /* DISABLE ANALOG ISOLATION AMSEL BITS FOR PORT B*/
 #define ADC_AMSEL_AIN10	(1 << 4) 	/* AIN10 -> PB4 */
@@ -67,9 +67,9 @@ typedef uint8_t ADC_CLEAR_DEN__PORTE;
 #define ADC_AMSEL_AIN9	(1 << 4)	/* AIN9 -> PE4 */
 #define ADC_AMSEL_AIN8	(1 << 5)	/* AIN8 -> PE5 */
 
-typedef uint8_t ADC_AMSEL__PORTB;
-typedef uint8_t ADC_AMSEL__PORTD;
-typedef uint8_t ADC_AMSEL__PORTE;
+typedef uint8_t ADC_AMSEL_PORTB_t;
+typedef uint8_t ADC_AMSEL_PORTD_t;
+typedef uint8_t ADC_AMSEL_PORTE_t;
 
 typedef enum{
 	ENABLE_ADC_MODULE0 = 1,
@@ -88,15 +88,36 @@ typedef enum{
 	ADC_PORTD_CHANNELS = 4,
 	ADC_PORTE_CHANNELS = 8
 } ADC_Port_Clock_t;
+
+typedef enum{
+	SSPRIO_0 = 0,
+	SSPRIO_1,
+	SSPRIO_2,
+	SSPRIO_3
+} ADC_SSPRIO_t;
+
 	
 typedef struct ADC_Init_t{
-	ADC_Enable_t ADC_Module;				/* Enable ADC clock*/ 
+	ADC_Enable_t ADC_Module;				/* Enable ADC clock */ 
 	ADC_Port_Clock_t ADC_Ports;				/* Enable the clock to appropiate GPIO modules */
-	
+	ADC_AFSEL_PORTB_t ADC_AFSEL_PORTB;		/* Select alternative function GPIO port B pins */
+	ADC_AFSEL_PORTD_t ADC_AFSEL_PORTD;		/* Select alternative function GPIO port D pins */
+	ADC_AFSEL_PORTE_t ADC_AFSEL_PORTE;		/* Select alternative function GPIO port E pins */
+	ADC_CLEAR_DEN_PORTB_t ADC_CLEAR_DEN_PORTB;		/* Disable digital function available on GPIO port B pins */
+	ADC_CLEAR_DEN_PORTD_t ADC_CLEAR_DEN_PORTD;		/* Disable digital function available on GPIO port D pins */
+	ADC_CLEAR_DEN_PORTE_t ADC_CLEAR_DEN_PORTE;		/* Disable digital function available on GPIO port E pins */
+	ADC_AMSEL_PORTB_t ADC_AMSEL_PORTB;		/* Disable analog isolation for ADC input on port B */
+	ADC_AMSEL_PORTD_t ADC_AMSEL_PORTD;		/* Disable analog isolation for ADC input on port D */
+	ADC_AMSEL_PORTE_t ADC_AMSEL_PORTE;		/* Disable analog isolation for ADC input on port E */
 }ADC_Init_t;
 
+//	ADC_SSPRIO_t ADC_SS0PRIO;		/* Reconfigure Sample Sequencer 0 priority */
+//	ADC_SSPRIO_t ADC_SS1PRIO;		/* Reconfigure Sample Sequencer 1 priority */
+//	ADC_SSPRIO_t ADC_SS2PRIO;		/* Reconfigure Sample Sequencer 2 priority */
+//	ADC_SSPRIO_t ADC_SS3PRIO;		/* Reconfigure Sample Sequencer 3 priority */
 
 void ADC12_Enable(ADC_Enable_t);
 void ADC12_Disable(ADC_Disable_t);
+void ADC12_Init(ADC_Init_t *ADC_Init );
 
 #endif

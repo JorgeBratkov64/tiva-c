@@ -39,12 +39,15 @@
 void ADC12_Init(ADC_Init_t *ADC_Init ){
 	SYSCTL -> RCGCADC = ADC_Init -> ADC_Module;
 	SYSCTL -> RCGCGPIO = ADC_Init -> ADC_Ports;	
-	GPIOB -> AFSEL = ADC_Init -> ADC_Channel_B;
-	GPIOD -> AFSEL = ADC_Init -> ADC_Channel_D;
-	GPIOE -> AFSEL = ADC_Init -> ADC_Channel_E;
-	GPIOB -> DEN = ADC_Init -> ADC_DEN_B;
-	GPIOD -> DEN = ADC_Init -> ADC_DEN_D;
-	GPIOE -> DEN = ADC_Init -> ADC_DEN_E;
+	GPIOB -> AFSEL = ADC_Init -> ADC_AFSEL_PORTB;
+	GPIOD -> AFSEL = ADC_Init -> ADC_AFSEL_PORTD;
+	GPIOE -> AFSEL = ADC_Init -> ADC_AFSEL_PORTE;
+	GPIOB -> DEN = ADC_Init -> ADC_CLEAR_DEN_PORTB;
+	GPIOD -> DEN = ADC_Init -> ADC_CLEAR_DEN_PORTD;
+	GPIOE -> DEN = ADC_Init -> ADC_CLEAR_DEN_PORTE;
+	GPIOB -> AMSEL = ADC_Init ->ADC_AMSEL_PORTB;
+	GPIOD -> AMSEL = ADC_Init ->ADC_AMSEL_PORTD;
+	GPIOE -> AMSEL = ADC_Init ->ADC_AMSEL_PORTE;
 }
 
 //typedef struct ADC_Init_t{
