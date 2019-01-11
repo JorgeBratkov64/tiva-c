@@ -86,6 +86,46 @@ void ADC12_Disable(ADC_Disable_t ADCModule){
 }
 
 /* 
+*	ADC12_ADC12_setSequencerPriority(ADC_SSn_t, ADC_SSPRIO_t)
+*   Sets the priority ADC_SSPRIO_t for the ADC sequencer ADC_SSn_t for the ADC module ADC_MODn_t
+*
+*/
+void ADC12_setSequencerPriority(ADC_MODn_t ADC_MODn, ADC_SSn_t ADC_SSn, ADC_SSPRIO_t ADC_SSPRIO){
+	if(ADC_MODn < 1){
+		switch(ADC_SSn){
+			case ADC_SS0:
+				ADC0 -> SSPRI = ADC_SSPRIO;
+			break;
+			case ADC_SS1:
+				ADC0 -> SSPRI = (ADC_SSPRIO << 4);
+			break;
+			case ADC_SS3:
+				ADC0 -> SSPRI = (ADC_SSPRIO << 8);
+			break;
+			default:
+				ADC0 -> SSPRI = (ADC_SSPRIO << 12);
+			break;
+		}
+	}
+	else{
+		switch(ADC_SSn){
+			case ADC_SS0:
+				ADC1 -> SSPRI = ADC_SSPRIO;
+			break;
+			case ADC_SS1:
+				ADC1 -> SSPRI = (ADC_SSPRIO << 4);
+			break;
+			case ADC_SS3:
+				ADC1 -> SSPRI = (ADC_SSPRIO << 8);
+			break;
+			default:
+				ADC1 -> SSPRI = (ADC_SSPRIO << 12);
+			break;
+		}
+	}
+}
+
+/* 
 *	ADC12_Reset()
 *   Resets an ADC module, clearing all module state, and registers to their default values.
 *

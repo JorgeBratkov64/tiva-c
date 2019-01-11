@@ -99,15 +99,6 @@ typedef enum{
 	ADC_PORTD_CHANNELS = 4,
 	ADC_PORTE_CHANNELS = 8
 } ADC_Port_Clock_t;
-
-
-typedef enum{
-	SSPRIO_0 = 0,
-	SSPRIO_1,
-	SSPRIO_2,
-	SSPRIO_3
-} ADC_SSPRIO_t;
-
 	
 typedef struct ADC_Init_t{
 	ADC_Enable_t ADC_Module;				/* Enable ADC clock */ 
@@ -130,9 +121,29 @@ typedef ADC_Init_t ADC_Deinit_t;		/* Deinit Type definition from Init structure 
 //	ADC_SSPRIO_t ADC_SS2PRIO;		/* Reconfigure Sample Sequencer 2 priority */
 //	ADC_SSPRIO_t ADC_SS3PRIO;		/* Reconfigure Sample Sequencer 3 priority */
 
+typedef enum{
+	ADC_SSPRIO_0 = 0,
+	ADC_SSPRIO_1,
+	ADC_SSPRIO_2,
+	ADC_SSPRIO_3	
+} ADC_SSPRIO_t;
+
+typedef enum{
+	ADC_SS0 = 0,
+	ADC_SS1,
+	ADC_SS2,
+	ADC_SS3	
+} ADC_SSn_t;
+
+typedef enum{
+	ADC_MOD0 = 0,
+	ADC_MOD1
+} ADC_MODn_t;
+
 void ADC12_Enable(ADC_Enable_t);
 void ADC12_Disable(ADC_Disable_t);
 void ADC12_Init(ADC_Init_t *ADC_Init );
 void ADC12_Denit(ADC_Deinit_t *ADC_Deinit );
+void ADC12_setSequencerPriority(ADC_MODn_t, ADC_SSn_t, ADC_SSPRIO_t);
 
 #endif
