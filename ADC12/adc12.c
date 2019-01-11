@@ -37,36 +37,35 @@
 */
 
 void ADC12_Init(ADC_Init_t *ADC_Init ){
-	SYSCTL -> RCGCADC = ADC_Init -> ADC_Module;
-	SYSCTL -> RCGCGPIO = ADC_Init -> ADC_Ports;	
-	GPIOB -> AFSEL = ADC_Init -> ADC_AFSEL_PORTB;
-	GPIOD -> AFSEL = ADC_Init -> ADC_AFSEL_PORTD;
-	GPIOE -> AFSEL = ADC_Init -> ADC_AFSEL_PORTE;
-	GPIOB -> DEN = ADC_Init -> ADC_CLEAR_DEN_PORTB;
-	GPIOD -> DEN = ADC_Init -> ADC_CLEAR_DEN_PORTD;
-	GPIOE -> DEN = ADC_Init -> ADC_CLEAR_DEN_PORTE;
-	GPIOB -> AMSEL = ADC_Init ->ADC_AMSEL_PORTB;
-	GPIOD -> AMSEL = ADC_Init ->ADC_AMSEL_PORTD;
-	GPIOE -> AMSEL = ADC_Init ->ADC_AMSEL_PORTE;
+	SYSCTL -> RCGCADC |= ADC_Init -> ADC_Module;
+	SYSCTL -> RCGCGPIO |= ADC_Init -> ADC_Ports;	
+	GPIOB -> AFSEL |= ADC_Init -> ADC_AFSEL_PORTB;
+	GPIOD -> AFSEL |= ADC_Init -> ADC_AFSEL_PORTD;
+	GPIOE -> AFSEL |= ADC_Init -> ADC_AFSEL_PORTE;
+	GPIOB -> DEN |= ADC_Init -> ADC_CLEAR_DEN_PORTB;
+	GPIOD -> DEN |= ADC_Init -> ADC_CLEAR_DEN_PORTD;
+	GPIOE -> DEN |= ADC_Init -> ADC_CLEAR_DEN_PORTE;
+	GPIOB -> AMSEL |= ADC_Init ->ADC_AMSEL_PORTB;
+	GPIOD -> AMSEL |= ADC_Init ->ADC_AMSEL_PORTD;
+	GPIOE -> AMSEL |= ADC_Init ->ADC_AMSEL_PORTE;
 }
-
-//typedef struct ADC_Init_t{
-//	ADC_Enable_t ADC_Module;
-//	ADC_Port_Clock_t ADC_Ports;
-//	ADC_PORTB_AFSEL_t ADC_Channel_B;
-//	ADC_PORTD_AFSEL_t ADC_Channel_D;
-//	ADC_PORTE_AFSEL_t ADC_Channel_C;
-//	ADC_PORTB_DEN_t ADC_DEN_B;
-//	ADC_PORTD_DEN_t ADC_DEN_D;
-//	ADC_PORTE_DEN_t ADC_DEN_E;
-//}ADC_Init_t;
 
 /* 
 *	ADC12_Denit()
 *
 */
-void ADC12_Deinit(void ){
-	
+void ADC12_Deinit(ADC_Deinit_t *ADC_Deinit ){
+	SYSCTL -> RCGCADC &= ADC_Deinit -> ADC_Module;
+	SYSCTL -> RCGCGPIO &= ADC_Deinit -> ADC_Ports;	
+	GPIOB -> AFSEL &= ADC_Deinit -> ADC_AFSEL_PORTB;
+	GPIOD -> AFSEL &= ADC_Deinit -> ADC_AFSEL_PORTD;
+	GPIOE -> AFSEL &= ADC_Deinit -> ADC_AFSEL_PORTE;
+	GPIOB -> DEN &= ADC_Deinit -> ADC_CLEAR_DEN_PORTB;
+	GPIOD -> DEN &= ADC_Deinit -> ADC_CLEAR_DEN_PORTD;
+	GPIOE -> DEN &= ADC_Deinit -> ADC_CLEAR_DEN_PORTE;
+	GPIOB -> AMSEL &= ADC_Deinit ->ADC_AMSEL_PORTB;
+	GPIOD -> AMSEL &= ADC_Deinit ->ADC_AMSEL_PORTD;
+	GPIOE -> AMSEL &= ADC_Deinit ->ADC_AMSEL_PORTE;
 }
 
 /* 

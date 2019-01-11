@@ -13,6 +13,7 @@
 #define ADC_AFSEL_AIN6	(1 << 1)	/* AIN6 -> PD1 */
 #define ADC_AFSEL_AIN5	(1 << 2)	/* AIN5 -> PD2 */
 #define ADC_AFSEL_AIN4	(1 << 3)	/* AIN4 -> PD3 */
+#define ADC_AFSEL_DISABLE (0 << 0)
 
 /* AFSEL BITS FOR PORT E*/
 #define ADC_AFSEL_AIN3	(1 << 0)	/* AIN3 -> PE0 */
@@ -30,12 +31,14 @@ typedef uint8_t ADC_AFSEL_PORTE_t;
 /* CLEAR DEN BITS FOR PORT B*/
 #define ADC_CLEAR_DEN_AIN10	~(1 << 4) 	/* AIN10 -> PB4 */
 #define ADC_CLEAR_DEN_AIN11	~(1 << 5) 	/* AIN11 -> PB5 */
+#define ADC_SET_DEN_PORTB (3 << 4)
 
 /* CLEAR DEN BITS FOR PORT D*/
 #define ADC_CLEAR_DEN_AIN7	~(1 << 0)	/* AIN7 -> PD0 */
 #define ADC_CLEAR_DEN_AIN6	~(1 << 1)	/* AIN6 -> PD1 */
 #define ADC_CLEAR_DEN_AIN5	~(1 << 2)	/* AIN5 -> PD2 */
 #define ADC_CLEAR_DEN_AIN4	~(1 << 3)	/* AIN4 -> PD3 */
+#define ADC_SET_DEN_PORTD (0x0F)
 
 /* CLEAR DEN BITS FOR PORT E*/
 #define ADC_CLEAR_DEN_AIN3	~(1 << 0)	/* AIN3 -> PE0 */
@@ -44,6 +47,7 @@ typedef uint8_t ADC_AFSEL_PORTE_t;
 #define ADC_CLEAR_DEN_AIN0	~(1 << 3)	/* AIN0 -> PE3 */
 #define ADC_CLEAR_DEN_AIN9	~(1 << 4)	/* AIN9 -> PE4 */
 #define ADC_CLEAR_DEN_AIN8	~(1 << 5)	/* AIN8 -> PE5 */
+#define ADC_SET_DEN_PORTE (0x3F)
 
 typedef uint8_t ADC_CLEAR_DEN_PORTB_t;
 typedef uint8_t ADC_CLEAR_DEN_PORTD_t;
@@ -52,12 +56,14 @@ typedef uint8_t ADC_CLEAR_DEN_PORTE_t;
 /* DISABLE ANALOG ISOLATION AMSEL BITS FOR PORT B*/
 #define ADC_AMSEL_AIN10	(1 << 4) 	/* AIN10 -> PB4 */
 #define ADC_AMSEL_AIN11	(1 << 5) 	/* AIN11 -> PB5 */
+#define ADC_AMSEL_ENABLE_PORTB ~(3 << 4)
 
 /* DISABLE ANALOG ISOLATION AFSEL BITS FOR PORT D*/
 #define ADC_AMSEL_AIN7	(1 << 0)	/* AIN7 -> PD0 */
 #define ADC_AMSEL_AIN6	(1 << 1)	/* AIN6 -> PD1 */
 #define ADC_AMSEL_AIN5	(1 << 2)	/* AIN5 -> PD2 */
 #define ADC_AMSEL_AIN4	(1 << 3)	/* AIN4 -> PD3 */
+#define ADC_AMSEL_ENABLE_PORTD ~(0x0F)
 
 /* DISABLE ANALOG ISOLATION AFSEL BITS FOR PORT E*/
 #define ADC_AMSEL_AIN3	(1 << 0)	/* AIN3 -> PE0 */
@@ -66,6 +72,7 @@ typedef uint8_t ADC_CLEAR_DEN_PORTE_t;
 #define ADC_AMSEL_AIN0	(1 << 3)	/* AIN0 -> PE3 */
 #define ADC_AMSEL_AIN9	(1 << 4)	/* AIN9 -> PE4 */
 #define ADC_AMSEL_AIN8	(1 << 5)	/* AIN8 -> PE5 */
+#define ADC_AMSEL_ENABLE_PORTE ~(0x3F)
 
 typedef uint8_t ADC_AMSEL_PORTB_t;
 typedef uint8_t ADC_AMSEL_PORTD_t;
@@ -74,20 +81,25 @@ typedef uint8_t ADC_AMSEL_PORTE_t;
 typedef enum{
 	ENABLE_ADC_MODULE0 = 1,
 	ENABLE_ADC_MODULE1,
-	ENABLE_ADC_BOTH 
+	ENABLE_ADC_BOTH,
+	DISABLE_ADC = 0,
+	DISABLE_ADC_MOD1,
+	DISABLE_ADC_MOD0
 } ADC_Enable_t;
 
 typedef enum{
-	DISABLE_ADC_MODULE0 = 1,
-	DISABLE_ADC_MODULE1,
-	DISABLE_ADC_BOTH 
+	DISABLE_ADC_MODULE0 = 2,
+	DISABLE_ADC_MODULE1 = 1,
+	DISABLE_ADC_BOTH = 0 
 } ADC_Disable_t;
 
 typedef enum{
+	ADC_PORT_CHANNELS_DISABLE = 0,
 	ADC_PORTB_CHANNELS = 1,
 	ADC_PORTD_CHANNELS = 4,
 	ADC_PORTE_CHANNELS = 8
 } ADC_Port_Clock_t;
+
 
 typedef enum{
 	SSPRIO_0 = 0,
@@ -111,6 +123,8 @@ typedef struct ADC_Init_t{
 	ADC_AMSEL_PORTE_t ADC_AMSEL_PORTE;		/* Disable analog isolation for ADC input on port E */
 }ADC_Init_t;
 
+typedef ADC_Init_t ADC_Deinit_t;		/* Deinit Type definition from Init structure  */
+
 //	ADC_SSPRIO_t ADC_SS0PRIO;		/* Reconfigure Sample Sequencer 0 priority */
 //	ADC_SSPRIO_t ADC_SS1PRIO;		/* Reconfigure Sample Sequencer 1 priority */
 //	ADC_SSPRIO_t ADC_SS2PRIO;		/* Reconfigure Sample Sequencer 2 priority */
@@ -119,5 +133,6 @@ typedef struct ADC_Init_t{
 void ADC12_Enable(ADC_Enable_t);
 void ADC12_Disable(ADC_Disable_t);
 void ADC12_Init(ADC_Init_t *ADC_Init );
+void ADC12_Denit(ADC_Deinit_t *ADC_Deinit );
 
 #endif
