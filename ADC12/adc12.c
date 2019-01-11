@@ -37,8 +37,26 @@
 */
 
 void ADC12_Init(ADC_Init_t *ADC_Init ){
-	ADC12_Enable();
+	SYSCTL -> RCGCADC = ADC_Init -> ADC_Module;
+	SYSCTL -> RCGCGPIO = ADC_Init -> ADC_Ports;	
+	GPIOB -> AFSEL = ADC_Init -> ADC_Channel_B;
+	GPIOD -> AFSEL = ADC_Init -> ADC_Channel_D;
+	GPIOE -> AFSEL = ADC_Init -> ADC_Channel_E;
+	GPIOB -> DEN = ADC_Init -> ADC_DEN_B;
+	GPIOD -> DEN = ADC_Init -> ADC_DEN_D;
+	GPIOE -> DEN = ADC_Init -> ADC_DEN_E;
 }
+
+//typedef struct ADC_Init_t{
+//	ADC_Enable_t ADC_Module;
+//	ADC_Port_Clock_t ADC_Ports;
+//	ADC_PORTB_AFSEL_t ADC_Channel_B;
+//	ADC_PORTD_AFSEL_t ADC_Channel_D;
+//	ADC_PORTE_AFSEL_t ADC_Channel_C;
+//	ADC_PORTB_DEN_t ADC_DEN_B;
+//	ADC_PORTD_DEN_t ADC_DEN_D;
+//	ADC_PORTE_DEN_t ADC_DEN_E;
+//}ADC_Init_t;
 
 /* 
 *	ADC12_Denit()
