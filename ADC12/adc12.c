@@ -126,29 +126,12 @@ void ADC12_setSequencerPriority(ADC_MODn_t ADC_MODn, ADC_SSn_t ADC_SSn, ADC_SSPR
 }
 
 /* 
-*	ADC12_Reset()
-*   Resets an ADC module, clearing all module state, and registers to their default values.
+*	ADC12_SampleSequencer_Config()
+*   
 *
 */
-void ADC12_Reset(){
-}
+void ADC12_SampleSequencer_Config(ADC_MODn_t ADC_MODn, ADC_SSn_t ADC_SSn){
 
-/* 
-*	ADC12_Start_Convertion()
-*   Starts a new ADC conversion.
-*
-*/
-
-void ADC12_Start_Convertion(void){
-}
-
-/* 
-*	ADC12_Read()
-*   Reads the result from an ADC conversion that was previously started.
-*
-*/
- uint16_t ADC12_Read(void){
-	 return 0;
 }
 
 /* 
@@ -156,6 +139,7 @@ void ADC12_Start_Convertion(void){
 *   
 *
 */
+
 void ADC12_Set_Differential_Input(void){
 }
 
