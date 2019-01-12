@@ -139,11 +139,26 @@ typedef enum{
 	ADC_MOD1
 } ADC_MODn_t;
 
+typedef enum{
+	TRIG_SSn = 0, 					/* SSn bit in the ADCPSSI register.	*/
+	TRIG_ANALOG_COMPARATOR0,		/* Analog Comparator Control 0 (ACCTL0) register	*/
+	TRIG_ANALOG_COMPARATOR1,		/* Analog Comparator Control 1 (ACCTL1) register	*/
+	TRIG_GPIO = 4,
+	TRIG_TIMMER,
+	TRIG_PWMGEN0,					/* PWM generator 0	*/
+	TRIG_PWMGEN1,					/* PWM generator 1	*/
+	TRIG_PWMGEN2,					/* PWM generator 2	*/
+	TRIG_PWMGEN3,					/* PWM generator 3	*/
+	CONTINOUS_SAMPLE = 15			/* Always (continuously sample)	*/ 	
+} ADC_TRIGGER_EVENT_t;
+
+
 void ADC12_Enable(ADC_Enable_t);
 void ADC12_Disable(ADC_Disable_t);
 void ADC12_Init(ADC_Init_t *ADC_Init );
 void ADC12_Denit(ADC_Deinit_t *ADC_Deinit );
 void ADC12_setSequencerPriority(ADC_MODn_t, ADC_SSn_t, ADC_SSPRIO_t);
 void ADC12_SampleSequencer_Config(ADC_MODn_t , ADC_SSn_t );
+void ADC12_Set_Trigger_Event(ADC_SSn_t , ADC_TRIGGER_EVENT_t);
 
 #endif
