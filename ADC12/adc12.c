@@ -126,35 +126,85 @@ void ADC12_setSequencerPriority(ADC_MODn_t ADC_MODn, ADC_SSn_t ADC_SSn, ADC_SSPR
 }
 
 /* 
-*	ADC12_SampleSequencer_Config()
+*	SS_Disable(ADC_MODn_t, ADC_SSn_t)
 *   
 *
 */
-void ADC12_SampleSequencer_Config(ADC_MODn_t ADC_MODn, ADC_SSn_t ADC_SSn){
+void SS_Disable(ADC_MODn_t ADC_MODn, ADC_SSn_t ADC_SSn){
 	if(ADC_MODn == 0){		/* ADC Module 0 */
 		switch(ADC_SSn){
 			case ADC_SS0:	/* Sample Sequencer 0	*/
+				ADC0 ->ACTSS = ~(1 << 0);
 			break;
 			case ADC_SS1:	/* Sample Sequencer 1	*/
+				ADC0 ->ACTSS = ~(1 << 1);
 			break;
 			case ADC_SS2:	/* Sample Sequencer 2	*/
+				ADC0 ->ACTSS = ~(1 << 2);
 			break;
 			default:		/* Sample Sequencer 3	*/
+				ADC0 ->ACTSS = ~(1 << 3);
 			break;
 		}
 	}
 	else{					/* ADC Module 1 */
 		switch(ADC_SSn){
 			case ADC_SS0:	/* Sample Sequencer 0	*/
+				ADC1 ->ACTSS = ~(1 << 0);
 			break;
 			case ADC_SS1:	/* Sample Sequencer 1	*/
+				ADC1 ->ACTSS = ~(1 << 1);
 			break;
 			case ADC_SS2:	/* Sample Sequencer 2	*/
+				ADC1 ->ACTSS = ~(1 << 2);
 			break;
 			default:		/* Sample Sequencer 3	*/
+				ADC1 ->ACTSS = ~(1 << 3);
 			break;			
 		}
 	}
+}
+
+/* 
+*	ADC12_Set_Trigger_Event(ADC_SSn_t, ADC_TRIGGER_EVENT_t)
+*   
+*
+*/
+void ADC12_Set_Trigger_Event(ADC_MODn_t ADC_MODn, ADC_SSn_t ADC_SSn, ADC_TRIGGER_EVENT_t ADC_TRIGER_EVENT){
+	
+	if(0 == ADC_MODn){
+		switch(ADC_SSn){
+		case 0:		/* Sample Sequencer 0	*/
+			ADC0 -> EMUX = (ADC_TRIGER_EVENT << 0);
+		break;
+		case 1:		/* Sample Sequencer 1	*/
+			ADC0 -> EMUX = (ADC_TRIGER_EVENT << 4);
+		break;
+		case 2:		/* Sample Sequencer 2	*/
+			ADC0 -> EMUX = (ADC_TRIGER_EVENT << 8);
+		break;
+		default:	/* Sample Sequencer 3	*/
+			ADC0 -> EMUX = (ADC_TRIGER_EVENT << 12);
+		break;
+		}
+	}
+	else{
+		switch(ADC_SSn){
+		case 0:		/* Sample Sequencer 0	*/
+			ADC1 -> EMUX = (ADC_TRIGER_EVENT << 0);
+		break;
+		case 1:		/* Sample Sequencer 1	*/
+			ADC1 -> EMUX = (ADC_TRIGER_EVENT << 4);
+		break;
+		case 2:		/* Sample Sequencer 2	*/
+			ADC1 -> EMUX = (ADC_TRIGER_EVENT << 8);
+		break;
+		default:	/* Sample Sequencer 3	*/
+			ADC1 -> EMUX = (ADC_TRIGER_EVENT << 12);
+		break;
+		}
+	}
+
 }
 
 /* 
