@@ -152,6 +152,17 @@ typedef enum{
 	CONTINOUS_SAMPLE = 15			/* Always (continuously sample)	*/ 	
 } ADC_TRIGGER_EVENT_t;
 
+typedef enum {
+	GEN_PWM0 = 0,
+	GEN_PWM1
+} PWMn_MOD_t;
+
+typedef enum {
+	GEN0 = 0,
+	GEN1,
+	GEN2,
+	GEN3
+} GENn_PWM_t;
 
 void ADC12_Enable(ADC_Enable_t);
 void ADC12_Disable(ADC_Disable_t);
@@ -160,5 +171,6 @@ void ADC12_Denit(ADC_Deinit_t *ADC_Deinit );
 void ADC12_setSequencerPriority(ADC_MODn_t, ADC_SSn_t, ADC_SSPRIO_t);
 void ADC12_SampleSequencer_Config(ADC_MODn_t , ADC_SSn_t );
 void ADC12_Set_Trigger_Event(ADC_MODn_t, ADC_SSn_t , ADC_TRIGGER_EVENT_t);
+void ADC12_PWM_Trigger_Source_Sel(ADC_MODn_t, GENn_PWM_t, PWMn_MOD_t);
 
 #endif

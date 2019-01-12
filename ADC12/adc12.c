@@ -166,13 +166,13 @@ void SS_Disable(ADC_MODn_t ADC_MODn, ADC_SSn_t ADC_SSn){
 }
 
 /* 
-*	ADC12_Set_Trigger_Event(ADC_SSn_t, ADC_TRIGGER_EVENT_t)
+*	ADC12_Set_Trigger_Event(ADC_MODn_t, ADC_SSn_t, ADC_TRIGGER_EVENT_t)
 *   
 *
 */
 void ADC12_Set_Trigger_Event(ADC_MODn_t ADC_MODn, ADC_SSn_t ADC_SSn, ADC_TRIGGER_EVENT_t ADC_TRIGER_EVENT){
 	
-	if(0 == ADC_MODn){
+	if(0 == ADC_MODn){		/* ADC Module 0 */
 		switch(ADC_SSn){
 		case 0:		/* Sample Sequencer 0	*/
 			ADC0 -> EMUX = (ADC_TRIGER_EVENT << 0);
@@ -189,7 +189,7 @@ void ADC12_Set_Trigger_Event(ADC_MODn_t ADC_MODn, ADC_SSn_t ADC_SSn, ADC_TRIGGER
 		}
 	}
 	else{
-		switch(ADC_SSn){
+		switch(ADC_SSn){	/* ADC Module 1 */
 		case 0:		/* Sample Sequencer 0	*/
 			ADC1 -> EMUX = (ADC_TRIGER_EVENT << 0);
 		break;
@@ -205,6 +205,46 @@ void ADC12_Set_Trigger_Event(ADC_MODn_t ADC_MODn, ADC_SSn_t ADC_SSn, ADC_TRIGGER
 		}
 	}
 
+}
+
+/* 
+*	ADC12_PWM_Trigger_Source_Sel(ADC_MODn_t, GENn_PWM_t, PWMn_MOD_t)
+*   
+*
+*/
+void ADC12_PWM_Trigger_Source_Sel(ADC_MODn_t ADC_MODn, GENn_PWM_t GENn_PWM, PWMn_MOD_t PWMn_MOD){
+	if(0 == ADC_MODn){		/* ADC Module 0 */
+		switch(GENn_PWM){	
+			case 0:
+				ADC0 -> TSSEL = (PWMn_MOD << 4);	/* Generator 0 PWM Module Trigger Select	*/	
+			break;
+			case 1:
+				ADC0 -> TSSEL = (PWMn_MOD << 12);	/* Generator 1 PWM Module Trigger Select	*/
+			break;
+			case 2:
+				ADC0 -> TSSEL = (PWMn_MOD << 20);	/* Generator 2 PWM Module Trigger Select	*/
+			break;
+			default:
+				ADC0 -> TSSEL = (PWMn_MOD << 28);	/* Generator 3 PWM Module Trigger Select	*/
+			break;
+		}
+	}
+	else{					/* ADC Module 1 */
+		switch(GENn_PWM){	
+			case 0:
+				ADC1 -> TSSEL = (PWMn_MOD << 4);	/* Generator 0 PWM Module Trigger Select	*/	
+			break;
+			case 1:
+				ADC1 -> TSSEL = (PWMn_MOD << 12);	/* Generator 1 PWM Module Trigger Select	*/	
+			break;
+			case 2:
+				ADC1 -> TSSEL = (PWMn_MOD << 20);	/* Generator 2 PWM Module Trigger Select	*/	
+			break;
+			default:
+				ADC1 -> TSSEL = (PWMn_MOD << 28);	/* Generator 3 PWM Module Trigger Select	*/	
+			break;
+		}
+	}
 }
 
 /* 
