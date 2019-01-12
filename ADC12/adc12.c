@@ -131,7 +131,30 @@ void ADC12_setSequencerPriority(ADC_MODn_t ADC_MODn, ADC_SSn_t ADC_SSn, ADC_SSPR
 *
 */
 void ADC12_SampleSequencer_Config(ADC_MODn_t ADC_MODn, ADC_SSn_t ADC_SSn){
-
+	if(ADC_MODn == 0){		/* ADC Module 0 */
+		switch(ADC_SSn){
+			case ADC_SS0:	/* Sample Sequencer 0	*/
+			break;
+			case ADC_SS1:	/* Sample Sequencer 1	*/
+			break;
+			case ADC_SS2:	/* Sample Sequencer 2	*/
+			break;
+			default:		/* Sample Sequencer 3	*/
+			break;
+		}
+	}
+	else{					/* ADC Module 1 */
+		switch(ADC_SSn){
+			case ADC_SS0:	/* Sample Sequencer 0	*/
+			break;
+			case ADC_SS1:	/* Sample Sequencer 1	*/
+			break;
+			case ADC_SS2:	/* Sample Sequencer 2	*/
+			break;
+			default:		/* Sample Sequencer 3	*/
+			break;			
+		}
+	}
 }
 
 /* 
