@@ -218,7 +218,7 @@ typedef enum{
 	Dn = 1,			/* Sample Differential Input Select */ 
 	ENDn = 2,		/* End of Sequence */
 	IEn = 4,		/* The raw interrupt signal (INR0 bit) is asserted at the end of this sample's conversion */
-	TS0 = 8			/* The temperature sensor is read */
+	TSn = 8			/* The temperature sensor is read */
 } SSCTRLF_t;
 
 
@@ -236,6 +236,7 @@ void ADC12_Set_Sample_Ctrl1(ADC_MODn_t , SSCTRLn_t , SSCTRLF_t );
 void ADC12_Set_Sample_Ctrl2(ADC_MODn_t , SSCTRLn_t , SSCTRLF_t );
 void ADC12_Set_Sample_Ctrl3(ADC_MODn_t , SSCTRLF_t );
 void ADC12_Set_End_SS_Ctrl0(ADC_MODn_t ADC_MODn, SSCTRL0_t SSCTRL0);
-void ADC12_Set_End_SS_Ctrln(ADC_MODn_t ADC_MODn, SSCTRL0_t SSCTRL0);
+void ADC12_Set_End_SS_Ctrl1(ADC_MODn_t ADC_MODn, SSCTRLn_t SSCTRL0);
+void ADC12_Set_End_SS_Ctrl2(ADC_MODn_t ADC_MODn, SSCTRLn_t SSCTRL0);
 
 #endif
