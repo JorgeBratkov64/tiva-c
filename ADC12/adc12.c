@@ -1,29 +1,28 @@
 /*
-* TM4C123G ADC12 Driver
-* Functions implemented in this file are taken as example from the article from below
-* http://ww1.microchip.com/downloads/en/AppNotes/Atmel-42451-SAM-Analog-to-Digital-Converter-ADC-Driver_ApplicationNote_AT11380.pdf
-* 
-//MIT License
 
-//Copyright (c) 2018 JorgeBratkov64
+TM4C123G ADC12 Driver
 
-//Permission is hereby granted, free of charge, to any person obtaining a copy
-//of this software and associated documentation files (the "Software"), to deal
-//in the Software without restriction, including without limitation the rights
-//to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-//copies of the Software, and to permit persons to whom the Software is
-//furnished to do so, subject to the following conditions:
+MIT License
 
-//The above copyright notice and this permission notice shall be included in all
-//copies or substantial portions of the Software.
+Copyright (c) 2018 JorgeBratkov64
 
-//THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-//IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-//FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-//AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-//LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-//OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-//SOFTWARE.
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 
 */
 
@@ -94,7 +93,7 @@ void ADC12_Disable(ADC_Disable_t ADCModule){
 *
 */
 void ADC12_setSequencerPriority(ADC_MODn_t ADC_MODn, ADC_SSn_t ADC_SSn, ADC_SSPRIO_t ADC_SSPRIO){
-	if(ADC_MODn < 1){
+	if(ADC_MOD0 == ADC_MODn){
 		switch(ADC_SSn){
 			case ADC_SS0:
 				ADC0 -> SSPRI = ADC_SSPRIO;
@@ -134,7 +133,7 @@ void ADC12_setSequencerPriority(ADC_MODn_t ADC_MODn, ADC_SSn_t ADC_SSn, ADC_SSPR
 *
 */
 void SS_Disable(ADC_MODn_t ADC_MODn, ADC_SSn_t ADC_SSn){
-	if(ADC_MODn == 0){		/* ADC Module 0 */
+	if(ADC_MOD0 == ADC_MODn){		/* ADC Module 0 */
 		switch(ADC_SSn){
 			case ADC_SS0:	/* Sample Sequencer 0	*/
 				ADC0 ->ACTSS = ~(1 << 0);
@@ -175,7 +174,7 @@ void SS_Disable(ADC_MODn_t ADC_MODn, ADC_SSn_t ADC_SSn){
 */
 void ADC12_Set_Trigger_Event(ADC_MODn_t ADC_MODn, ADC_SSn_t ADC_SSn, ADC_TRIGGER_EVENT_t ADC_TRIGER_EVENT){
 	
-	if(0 == ADC_MODn){		/* ADC Module 0 */
+	if(ADC_MOD0 == ADC_MODn){		/* ADC Module 0 */
 		switch(ADC_SSn){
 		case 0:		/* Sample Sequencer 0	*/
 			ADC0 -> EMUX = (ADC_TRIGER_EVENT << 0);
@@ -216,7 +215,7 @@ void ADC12_Set_Trigger_Event(ADC_MODn_t ADC_MODn, ADC_SSn_t ADC_SSn, ADC_TRIGGER
 *
 */
 void ADC12_PWM_Trigger_Source_Sel(ADC_MODn_t ADC_MODn, GENn_PWM_t GENn_PWM, PWMn_MOD_t PWMn_MOD){
-	if(0 == ADC_MODn){		/* ADC Module 0 */
+	if(ADC_MOD0 == ADC_MODn){		/* ADC Module 0 */
 		switch(GENn_PWM){	
 			case 0:
 				ADC0 -> TSSEL = (PWMn_MOD << 4);	/* Generator 0 PWM Module Trigger Select	*/	
@@ -257,7 +256,7 @@ void ADC12_PWM_Trigger_Source_Sel(ADC_MODn_t ADC_MODn, GENn_PWM_t GENn_PWM, PWMn
 */
 
 void ADC_SS_Input_Multiplexer_Sel(ADC_MODn_t ADC_MODn, ADC_SSn_t ADC_SSn, SSMUXn_t SSMUXn, SSMUX_AINn_t SSMUX_AINn){
-	if(0 == ADC_MODn){		/* ADC Module 0 */
+	if(ADC_MOD0 == ADC_MODn){		/* ADC Module 0 */
 		if(0 == ADC_SSn){
 			switch(SSMUXn){	
 				case 0:		/* Select Sample Sequencer 0 */	
@@ -333,11 +332,165 @@ uint16_t ADC_Write_AIn_On_MUXn(SSMUXn_t SSMUXn, SSMUX_AINn_t SSMUX_AINn){
 }
 
 /* 
-*	ADC12_Set_Differential_Input()
+*	ADC12_Set_Sample_Ctrl0(ADC_MODn_t, SSCTRL0_t, SSCTRL0F_t)
 *   
 *
 */
 
-void ADC12_Set_Differential_Input(void){
+void ADC12_Set_Sample_Ctrl0(ADC_MODn_t ADC_MODn, SSCTRL0_t SSCTRL0, SSCTRLF_t SSCTRL0F){
+	if(ADC_MOD0 == ADC_MODn){		/* ADC Module 0 */
+		switch(SSCTRL0){
+			case SSCTRL0_1STSAMPLE:				/* SSCTRL0_1STSAMPLE */
+				ADC0 -> SSCTL0 |= (SSCTRL0F << 0);
+			break;
+			case SSCTRL0_2NDSAMPLE:				/* SSCTRL0_2NDSAMPLE */
+				ADC0 -> SSCTL0 |= (SSCTRL0F << 4);
+			break;
+			case SSCTRL0_3RDSAMPLE:				/* SSCTRL0_3RDSAMPLE */
+				ADC0 -> SSCTL0 |= (SSCTRL0F << 8);
+			break;
+			case SSCTRL0_4THSAMPLE:				/* SSCTRL0_4THSAMPLE */
+				ADC0 -> SSCTL0 |= (SSCTRL0F << 12);
+			break;
+			case SSCTRL0_5THSAMPLE:				/* SSCTRL0_5THSAMPLE */
+				ADC0 -> SSCTL0 |= (SSCTRL0F << 16);
+			break;
+			case SSCTRL0_6THSAMPLE:				/* SSCTRL0_6THSAMPLE */
+				ADC0 -> SSCTL0 |= (SSCTRL0F << 20);
+			break;
+			case SSCTRL0_7THSAMPLE:				/* SSCTRL0_7THSAMPLE */
+				ADC0 -> SSCTL0 |= (SSCTRL0F << 24);
+			break;
+			default:							/* SSCTRL0_8THSAMPLE */
+				ADC0 -> SSCTL0 |= (SSCTRL0F << 28);
+			break;
+		}
+	}
+	else{					/* ADC Module 1 */
+		switch(SSCTRL0){
+			case SSCTRL0_1STSAMPLE:				/* SSCTRL0_1STSAMPLE */
+				ADC1 -> SSCTL0 |= (SSCTRL0F << 0);
+			break;
+			case SSCTRL0_2NDSAMPLE:				/* SSCTRL0_2NDSAMPLE */
+				ADC1 -> SSCTL0 |= (SSCTRL0F << 4);
+			break;
+			case SSCTRL0_3RDSAMPLE:				/* SSCTRL0_3RDSAMPLE */
+				ADC1 -> SSCTL0 |= (SSCTRL0F << 8);
+			break;
+			case SSCTRL0_4THSAMPLE:				/* SSCTRL0_4THSAMPLE */
+				ADC1 -> SSCTL0 |= (SSCTRL0F << 12);
+			break;
+			case SSCTRL0_5THSAMPLE:				/* SSCTRL0_5THSAMPLE */
+				ADC1 -> SSCTL0 |= (SSCTRL0F << 16);
+			break;
+			case SSCTRL0_6THSAMPLE:				/* SSCTRL0_6THSAMPLE */
+				ADC1 -> SSCTL0 |= (SSCTRL0F << 20);
+			break;
+			case SSCTRL0_7THSAMPLE:				/* SSCTRL0_7THSAMPLE */
+				ADC1 -> SSCTL0 |= (SSCTRL0F << 24);
+			break;
+			default:							/* SSCTRL0_8THSAMPLE */
+				ADC1 -> SSCTL0 |= (SSCTRL0F << 28);
+			break;
+		}
+	}
 }
+
+/* 
+*	ADC12_Set_Sample_Ctrl1(ADC_MODn_t, SSCTRL1_t, SSCTRL0F_t)
+*   
+*
+*/
+
+void ADC12_Set_Sample_Ctrl1(ADC_MODn_t ADC_MODn, SSCTRL1_t SSCTRL1, SSCTRLF_t SSCTRL0F){
+		if(ADC_MOD0 == ADC_MODn){		/* ADC Module 0 */
+			switch(SSCTRL1){
+				case SSCTRL0_1STSAMPLE:				/* SSCTRL1_1STSAMPLE */
+					ADC0 -> SSCTL0 |= (SSCTRL0F << 0);
+				break;
+				case SSCTRL0_2NDSAMPLE:				/* SSCTRL1_2NDSAMPLE */
+					ADC0 -> SSCTL0 |= (SSCTRL0F << 4);
+				break;
+				case SSCTRL0_3RDSAMPLE:				/* SSCTRL1_3RDSAMPLE */
+					ADC0 -> SSCTL0 |= (SSCTRL0F << 8);
+				break;
+				default:							/* SSCTRL1_4THSAMPLE */
+					ADC0 -> SSCTL0 |= (SSCTRL0F << 12);
+				break;
+			}
+		}
+		else{					/* ADC Module 1 */
+			switch(SSCTRL1){
+				case SSCTRL0_1STSAMPLE:				/* SSCTRL1_1STSAMPLE */
+					ADC1 -> SSCTL0 |= (SSCTRL0F << 0);
+				break;
+				case SSCTRL0_2NDSAMPLE:				/* SSCTRL1_2NDSAMPLE */
+					ADC1 -> SSCTL0 |= (SSCTRL0F << 4);
+				break;
+				case SSCTRL0_3RDSAMPLE:				/* SSCTRL1_3RDSAMPLE */
+					ADC1 -> SSCTL0 |= (SSCTRL0F << 8);
+				break;
+				default:							/* SSCTRL1_4THSAMPLE */
+					ADC1 -> SSCTL0 |= (SSCTRL0F << 12);
+				break;
+			}
+		}
+}
+
+/* 
+*	ADC12_Set_Sample_Ctrl2(ADC_MODn_t, SSCTRL2_t, SSCTRL0F_t)
+*   
+*
+*/
+
+void ADC12_Set_Sample_Ctrl2(ADC_MODn_t ADC_MODn, SSCTRL2_t SSCTRL2, SSCTRLF_t SSCTRLF){
+		if(ADC_MOD0 == ADC_MODn){		/* ADC Module 0 */
+			switch(SSCTRL2){
+				case SSCTRL0_1STSAMPLE:				/* SSCTRL2_1STSAMPLE */
+					ADC0 -> SSCTL0 |= (SSCTRLF << 0);			
+				break;
+				case SSCTRL0_2NDSAMPLE:				/* SSCTRL2_2NDSAMPLE */
+					ADC0 -> SSCTL0 |= (SSCTRLF << 4);
+				break;
+				case SSCTRL0_3RDSAMPLE:				/* SSCTRL2_3RDSAMPLE */
+					ADC0 -> SSCTL0 |= (SSCTRLF << 8);
+				break;
+				default:							/* SSCTRL2_4THSAMPLE */
+					ADC0 -> SSCTL0 |= (SSCTRLF << 12);
+				break;
+			}
+		}
+		else{					/* ADC Module 1 */
+			switch(SSCTRL2){
+				case SSCTRL0_1STSAMPLE:				/* SSCTRL2_1STSAMPLE */
+					ADC1 -> SSCTL0 |= (SSCTRLF << 0);
+				break;
+				case SSCTRL0_2NDSAMPLE:				/* SSCTRL2_2NDSAMPLE */
+					ADC1 -> SSCTL0 |= (SSCTRLF << 4);
+				break;
+				case SSCTRL0_3RDSAMPLE:				/* SSCTRL2_3RDSAMPLE */
+					ADC1 -> SSCTL0 |= (SSCTRLF << 8);
+				break;
+				default:							/* SSCTRL2_4THSAMPLE */
+					ADC1 -> SSCTL0 |= (SSCTRLF << 12);
+				break;
+			}
+		}
+}
+
+/* 
+*	ADC12_Set_Sample_Ctrl3(ADC_MODn_t, SSCTRLF_t)
+*   
+*
+*/
+
+void ADC12_Set_Sample_Ctrl3(ADC_MODn_t ADC_MODn, SSCTRLF_t SSCTRLF){
+		if(ADC_MOD0 == ADC_MODn){		/* ADC Module 0 */
+			ADC1 -> SSCTL0 |= ((SSCTRLF << 0) | SSCTLn_ENDn);		/* SSCTRL3_1STSAMPLE */
+		}
+		else{					/* ADC Module 1 */
+			ADC1 -> SSCTL0 |= (SSCTRLF << 0 | SSCTLn_ENDn);		/* SSCTRL3_1STSAMPLE */
+		}
+}
+
 

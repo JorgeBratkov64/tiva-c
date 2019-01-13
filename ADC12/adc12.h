@@ -73,6 +73,8 @@ typedef uint8_t ADC_CLEAR_DEN_PORTE_t;
 #define ADC_AMSEL_AIN8	(1 << 5)	/* AIN8 -> PE5 */
 #define ADC_AMSEL_ENABLE_PORTE ~(0x3F)
 
+#define SSCTLn_ENDn	(1 << 1)
+
 typedef uint8_t ADC_AMSEL_PORTB_t;
 typedef uint8_t ADC_AMSEL_PORTD_t;
 typedef uint8_t ADC_AMSEL_PORTE_t;
@@ -190,6 +192,43 @@ typedef enum {
 	SSMUX7
 } SSMUXn_t;
 
+typedef enum{
+	SSCTRL0_1STSAMPLE = 0,
+	SSCTRL0_2NDSAMPLE,
+	SSCTRL0_3RDSAMPLE,
+	SSCTRL0_4THSAMPLE,
+	SSCTRL0_5THSAMPLE,
+	SSCTRL0_6THSAMPLE,
+	SSCTRL0_7THSAMPLE,
+	SSCTRL0_8THSAMPLE
+} SSCTRL0_t;
+
+typedef enum{
+	SSCTRL1_1STSAMPLE = 0,
+	SSCTRL1_2NDSAMPLE,
+	SSCTRL1_3RDSAMPLE,
+	SSCTRL1_4THSAMPLE,
+} SSCTRL1_t;
+
+typedef enum{
+	SSCTRL2_1STSAMPLE = 0,
+	SSCTRL2_2NDSAMPLE,
+	SSCTRL2_3RDSAMPLE,
+	SSCTRL2_4THSAMPLE,
+} SSCTRL2_t;
+
+typedef enum{
+	SSCTRL3_1STSAMPLE = 0,
+} SSCTRL3_t;
+
+typedef enum{
+	Dn = 1,			/* Sample Differential Input Select */ 
+	ENDn = 2,		/* End of Sequence */
+	IEn = 4,		/* The raw interrupt signal (INR0 bit) is asserted at the end of this sample's conversion */
+	TS0 = 8			/* The temperature sensor is read */
+} SSCTRLF_t;
+
+
 void ADC12_Enable(ADC_Enable_t);
 void ADC12_Disable(ADC_Disable_t);
 void ADC12_Init(ADC_Init_t *ADC_Init );
@@ -199,5 +238,9 @@ void ADC12_SampleSequencer_Config(ADC_MODn_t , ADC_SSn_t );
 void ADC12_Set_Trigger_Event(ADC_MODn_t, ADC_SSn_t , ADC_TRIGGER_EVENT_t);
 void ADC12_PWM_Trigger_Source_Sel(ADC_MODn_t, GENn_PWM_t, PWMn_MOD_t);
 void ADC_SS_Input_Multiplexer_Sel(ADC_MODn_t ADC_MODn,ADC_SSn_t ADC_SSn, SSMUXn_t SSMUXn, SSMUX_AINn_t SSMUX_AINn);
+void ADC12_Set_Sample_Ctrl0(ADC_MODn_t , SSCTRL0_t , SSCTRLF_t );
+void ADC12_Set_Sample_Ctrl1(ADC_MODn_t , SSCTRL1_t , SSCTRLF_t );
+void ADC12_Set_Sample_Ctrl2(ADC_MODn_t , SSCTRL2_t , SSCTRLF_t );
+void ADC12_Set_Sample_Ctrl3(ADC_MODn_t , SSCTRLF_t );
 
 #endif
