@@ -402,9 +402,9 @@ void ADC12_Set_Sample_Ctrl0(ADC_MODn_t ADC_MODn, SSCTRL0_t SSCTRL0, SSCTRLF_t SS
 *
 */
 
-void ADC12_Set_Sample_Ctrl1(ADC_MODn_t ADC_MODn, SSCTRL1_t SSCTRL1, SSCTRLF_t SSCTRL0F){
+void ADC12_Set_Sample_Ctrl1(ADC_MODn_t ADC_MODn, SSCTRLn_t SSCTRLn, SSCTRLF_t SSCTRL0F){
 		if(ADC_MOD0 == ADC_MODn){		/* ADC Module 0 */
-			switch(SSCTRL1){
+			switch(SSCTRLn){
 				case SSCTRL0_1STSAMPLE:				/* SSCTRL1_1STSAMPLE */
 					ADC0 -> SSCTL0 |= (SSCTRL0F << 0);
 				break;
@@ -420,7 +420,7 @@ void ADC12_Set_Sample_Ctrl1(ADC_MODn_t ADC_MODn, SSCTRL1_t SSCTRL1, SSCTRLF_t SS
 			}
 		}
 		else{					/* ADC Module 1 */
-			switch(SSCTRL1){
+			switch(SSCTRLn){
 				case SSCTRL0_1STSAMPLE:				/* SSCTRL1_1STSAMPLE */
 					ADC1 -> SSCTL0 |= (SSCTRL0F << 0);
 				break;
@@ -443,9 +443,9 @@ void ADC12_Set_Sample_Ctrl1(ADC_MODn_t ADC_MODn, SSCTRL1_t SSCTRL1, SSCTRLF_t SS
 *
 */
 
-void ADC12_Set_Sample_Ctrl2(ADC_MODn_t ADC_MODn, SSCTRL2_t SSCTRL2, SSCTRLF_t SSCTRLF){
+void ADC12_Set_Sample_Ctrl2(ADC_MODn_t ADC_MODn, SSCTRLn_t SSCTRLn, SSCTRLF_t SSCTRLF){
 		if(ADC_MOD0 == ADC_MODn){		/* ADC Module 0 */
-			switch(SSCTRL2){
+			switch(SSCTRLn){
 				case SSCTRL0_1STSAMPLE:				/* SSCTRL2_1STSAMPLE */
 					ADC0 -> SSCTL0 |= (SSCTRLF << 0);			
 				break;
@@ -461,7 +461,7 @@ void ADC12_Set_Sample_Ctrl2(ADC_MODn_t ADC_MODn, SSCTRL2_t SSCTRL2, SSCTRLF_t SS
 			}
 		}
 		else{					/* ADC Module 1 */
-			switch(SSCTRL2){
+			switch(SSCTRLn){
 				case SSCTRL0_1STSAMPLE:				/* SSCTRL2_1STSAMPLE */
 					ADC1 -> SSCTL0 |= (SSCTRLF << 0);
 				break;
@@ -492,5 +492,109 @@ void ADC12_Set_Sample_Ctrl3(ADC_MODn_t ADC_MODn, SSCTRLF_t SSCTRLF){
 			ADC1 -> SSCTL0 |= (SSCTRLF << 0 | SSCTLn_ENDn);		/* SSCTRL3_1STSAMPLE */
 		}
 }
+ 
+/* 
+*	ADC12_Set_End_SS_Ctrl0(ADC_MODn_t, SSCTRLF_t)
+*   
+*
+*/
 
+void ADC12_Set_End_SS_Ctrl0(ADC_MODn_t ADC_MODn, SSCTRL0_t SSCTRL0){
+	if(ADC_MOD0 == ADC_MODn){		/* ADC Module 0 */
+		switch(SSCTRL0){
+			case SSCTRL0_1STSAMPLE:				/* SSCTRL0_1STSAMPLE */
+				ADC0 -> SSCTL0 |= (SSCTLn_ENDn << 0);
+			break;
+			case SSCTRL0_2NDSAMPLE:				/* SSCTRL0_2NDSAMPLE */
+				ADC0 -> SSCTL0 |= (SSCTLn_ENDn << 4);
+			break;
+			case SSCTRL0_3RDSAMPLE:				/* SSCTRL0_3RDSAMPLE */
+				ADC0 -> SSCTL0 |= (SSCTLn_ENDn << 8);
+			break;
+			case SSCTRL0_4THSAMPLE:				/* SSCTRL0_4THSAMPLE */
+				ADC0 -> SSCTL0 |= (SSCTLn_ENDn << 12);
+			break;
+			case SSCTRL0_5THSAMPLE:				/* SSCTRL0_5THSAMPLE */
+				ADC0 -> SSCTL0 |= (SSCTLn_ENDn << 16);
+			break;
+			case SSCTRL0_6THSAMPLE:				/* SSCTRL0_6THSAMPLE */
+				ADC0 -> SSCTL0 |= (SSCTLn_ENDn << 20);
+			break;
+			case SSCTRL0_7THSAMPLE:				/* SSCTRL0_7THSAMPLE */
+				ADC0 -> SSCTL0 |= (SSCTLn_ENDn << 24);
+			break;
+			default:							/* SSCTRL0_8THSAMPLE */
+				ADC0 -> SSCTL0 |= (SSCTLn_ENDn << 28);
+			break;
+		}
+	}
+	else{					/* ADC Module 1 */
+		switch(SSCTRL0){
+			case SSCTRL0_1STSAMPLE:				/* SSCTRL0_1STSAMPLE */
+				ADC1 -> SSCTL0 |= (SSCTLn_ENDn << 0);
+			break;
+			case SSCTRL0_2NDSAMPLE:				/* SSCTRL0_2NDSAMPLE */
+				ADC1 -> SSCTL0 |= (SSCTLn_ENDn << 4);
+			break;
+			case SSCTRL0_3RDSAMPLE:				/* SSCTRL0_3RDSAMPLE */
+				ADC1 -> SSCTL0 |= (SSCTLn_ENDn << 8);
+			break;
+			case SSCTRL0_4THSAMPLE:				/* SSCTRL0_4THSAMPLE */
+				ADC1 -> SSCTL0 |= (SSCTLn_ENDn << 12);
+			break;
+			case SSCTRL0_5THSAMPLE:				/* SSCTRL0_5THSAMPLE */
+				ADC1 -> SSCTL0 |= (SSCTLn_ENDn << 16);
+			break;
+			case SSCTRL0_6THSAMPLE:				/* SSCTRL0_6THSAMPLE */
+				ADC1 -> SSCTL0 |= (SSCTLn_ENDn << 20);
+			break;
+			case SSCTRL0_7THSAMPLE:				/* SSCTRL0_7THSAMPLE */
+				ADC1 -> SSCTL0 |= (SSCTLn_ENDn << 24);
+			break;
+			default:							/* SSCTRL0_8THSAMPLE */
+				ADC1 -> SSCTL0 |= (SSCTLn_ENDn << 28);
+			break;
+		}
+	}
+}
 
+/* 
+*	ADC12_Set_End_SS_Ctrln(ADC_MODn_t, SSCTRLn_t)
+*   
+*
+*/
+
+void ADC12_Set_End_SS_Ctrln(ADC_MODn_t ADC_MODn, SSCTRLn_t SSCTRLn){
+	if(ADC_MOD0 == ADC_MODn){		/* ADC Module 0 */
+		switch(SSCTRLn){
+			case SSCTRLn_1STSAMPLE:				/* SSCTRLn_1STSAMPLE */
+				ADC0 -> SSCTL0 |= (SSCTLn_ENDn << 0);
+			break;
+			case SSCTRLn_2NDSAMPLE:				/* SSCTRLn_2NDSAMPLE */
+				ADC0 -> SSCTL0 |= (SSCTLn_ENDn << 4);
+			break;
+			case SSCTRLn_3RDSAMPLE:				/* SSCTRLn_3RDSAMPLE */
+				ADC0 -> SSCTL0 |= (SSCTLn_ENDn << 8);
+			break;
+			default:							/* SSCTRLn_4THSAMPLE */
+				ADC0 -> SSCTL0 |= (SSCTLn_ENDn << 12);
+			break;
+		}
+	}
+	else{					/* ADC Module 1 */
+		switch(SSCTRLn){
+			case SSCTRLn_1STSAMPLE:				/* SSCTRLn_1STSAMPLE */
+				ADC1 -> SSCTL0 |= (SSCTLn_ENDn << 0);
+			break;
+			case SSCTRLn_2NDSAMPLE:				/* SSCTRLn_2NDSAMPLE */
+				ADC1 -> SSCTL0 |= (SSCTLn_ENDn << 4);
+			break;
+			case SSCTRLn_3RDSAMPLE:				/* SSCTRLn_3RDSAMPLE */
+				ADC1 -> SSCTL0 |= (SSCTLn_ENDn << 8);
+			break;
+			default:							/* SSCTRLn_4THSAMPLE */
+				ADC1 -> SSCTL0 |= (SSCTLn_ENDn << 12);
+			break;
+		}
+	}
+}

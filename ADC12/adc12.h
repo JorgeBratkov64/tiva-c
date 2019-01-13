@@ -204,18 +204,11 @@ typedef enum{
 } SSCTRL0_t;
 
 typedef enum{
-	SSCTRL1_1STSAMPLE = 0,
-	SSCTRL1_2NDSAMPLE,
-	SSCTRL1_3RDSAMPLE,
-	SSCTRL1_4THSAMPLE,
-} SSCTRL1_t;
-
-typedef enum{
-	SSCTRL2_1STSAMPLE = 0,
-	SSCTRL2_2NDSAMPLE,
-	SSCTRL2_3RDSAMPLE,
-	SSCTRL2_4THSAMPLE,
-} SSCTRL2_t;
+	SSCTRLn_1STSAMPLE = 0,
+	SSCTRLn_2NDSAMPLE,
+	SSCTRLn_3RDSAMPLE,
+	SSCTRLn_4THSAMPLE,
+} SSCTRLn_t;
 
 typedef enum{
 	SSCTRL3_1STSAMPLE = 0,
@@ -239,8 +232,10 @@ void ADC12_Set_Trigger_Event(ADC_MODn_t, ADC_SSn_t , ADC_TRIGGER_EVENT_t);
 void ADC12_PWM_Trigger_Source_Sel(ADC_MODn_t, GENn_PWM_t, PWMn_MOD_t);
 void ADC_SS_Input_Multiplexer_Sel(ADC_MODn_t ADC_MODn,ADC_SSn_t ADC_SSn, SSMUXn_t SSMUXn, SSMUX_AINn_t SSMUX_AINn);
 void ADC12_Set_Sample_Ctrl0(ADC_MODn_t , SSCTRL0_t , SSCTRLF_t );
-void ADC12_Set_Sample_Ctrl1(ADC_MODn_t , SSCTRL1_t , SSCTRLF_t );
-void ADC12_Set_Sample_Ctrl2(ADC_MODn_t , SSCTRL2_t , SSCTRLF_t );
+void ADC12_Set_Sample_Ctrl1(ADC_MODn_t , SSCTRLn_t , SSCTRLF_t );
+void ADC12_Set_Sample_Ctrl2(ADC_MODn_t , SSCTRLn_t , SSCTRLF_t );
 void ADC12_Set_Sample_Ctrl3(ADC_MODn_t , SSCTRLF_t );
+void ADC12_Set_End_SS_Ctrl0(ADC_MODn_t ADC_MODn, SSCTRL0_t SSCTRL0);
+void ADC12_Set_End_SS_Ctrln(ADC_MODn_t ADC_MODn, SSCTRL0_t SSCTRL0);
 
 #endif
