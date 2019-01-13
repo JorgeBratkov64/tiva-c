@@ -633,3 +633,56 @@ void ADC12_Set_End_SS_Ctrl2(ADC_MODn_t ADC_MODn, SSCTRLn_t SSCTRLn){
 		}
 	}
 }
+
+/* 
+*	ADC12_Interrupt_Mask(ADC_MODn_t)
+*   
+*
+*/
+
+void ADC12_Interrupt_Mask(ADC_MODn_t ADC_MODn ){
+	
+}
+
+/* 
+*	ADC12_Enable_SS_Logic(ADC_MODn_t, ADC_SSn_t)
+*   
+*
+*/
+
+void ADC12_Enable_SS_Logic(ADC_MODn_t ADC_MODn, ADC_SSn_t ADC_SSn){
+	if (ADC_MOD0 == ADC_MODn){
+		switch(ADC_SSn){
+			case ADC_SS0:
+				ADC0 -> ACTSS |= ONE << ZERO;
+			break;
+			case ADC_SS1:
+				ADC0 -> ACTSS |= ONE << ONE;
+			break;
+			case ADC_SS2:
+				ADC0 -> ACTSS |= ONE << TWO;
+			break;
+			default:
+				ADC0 -> ACTSS |= ONE << THREE;
+			break;			
+		}
+	}
+	else{
+		switch(ADC_SSn){
+			case ADC_SS0:
+				ADC1 -> ACTSS |= ONE << ZERO;
+			break;
+			case ADC_SS1:
+				ADC1 -> ACTSS |= ONE << ZERO;
+			break;
+			case ADC_SS2:
+				ADC1 -> ACTSS |= ONE << ZERO;
+			break;
+			default:
+				ADC1 -> ACTSS |= ONE << ZERO;
+			break;			
+		}
+	}
+	
+}
+

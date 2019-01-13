@@ -235,8 +235,10 @@ void ADC12_Set_Sample_Ctrl0(ADC_MODn_t , SSCTRL0_t , SSCTRLF_t );
 void ADC12_Set_Sample_Ctrl1(ADC_MODn_t , SSCTRLn_t , SSCTRLF_t );
 void ADC12_Set_Sample_Ctrl2(ADC_MODn_t , SSCTRLn_t , SSCTRLF_t );
 void ADC12_Set_Sample_Ctrl3(ADC_MODn_t , SSCTRLF_t );
-void ADC12_Set_End_SS_Ctrl0(ADC_MODn_t ADC_MODn, SSCTRL0_t SSCTRL0);
-void ADC12_Set_End_SS_Ctrl1(ADC_MODn_t ADC_MODn, SSCTRLn_t SSCTRL0);
-void ADC12_Set_End_SS_Ctrl2(ADC_MODn_t ADC_MODn, SSCTRLn_t SSCTRL0);
+void ADC12_Set_End_SS_Ctrl0(ADC_MODn_t , SSCTRL0_t );
+void ADC12_Set_End_SS_Ctrl1(ADC_MODn_t , SSCTRLn_t );
+void ADC12_Set_End_SS_Ctrl2(ADC_MODn_t , SSCTRLn_t );
+void ADC12_Interrupt_Mask(ADC_MODn_t );
+void ADC12_Enable_SS_Logic(ADC_MODn_t , ADC_SSn_t );
 
 #endif
