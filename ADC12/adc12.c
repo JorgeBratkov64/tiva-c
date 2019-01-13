@@ -31,6 +31,9 @@
 #include <stdint.h>
 #include "TM4C123.h"                    // Device header
 
+
+uint16_t ADC_Write_AIn_On_MUXn(SSMUXn_t SSMUXn, SSMUX_AINn_t SSMUX_AINn);
+
 /* 
 *	ADC12_Init()
 *
@@ -245,6 +248,88 @@ void ADC12_PWM_Trigger_Source_Sel(ADC_MODn_t ADC_MODn, GENn_PWM_t GENn_PWM, PWMn
 			break;
 		}
 	}
+}
+
+/* 
+*	ADC_SS_Input_Multiplexer_Sel(ADC_MODn_t, ADC_SSn_t, SSMUXn_t, SSMUX_AINn_t)
+*   
+*
+*/
+
+void ADC_SS_Input_Multiplexer_Sel(ADC_MODn_t ADC_MODn, ADC_SSn_t ADC_SSn, SSMUXn_t SSMUXn, SSMUX_AINn_t SSMUX_AINn){
+	if(0 == ADC_MODn){		/* ADC Module 0 */
+		if(0 == ADC_SSn){
+			switch(SSMUXn){	
+				case 0:		/* Select Sample Sequencer 0 */	
+					ADC0 -> SSMUX0 = ADC_Write_AIn_On_MUXn(SSMUXn, SSMUX_AINn);		/* AIn Sample Input Select on MUXn*/	
+				break;
+				case 1:		/* Select Sample Sequencer 1 */		
+					ADC0 -> SSMUX1 = ADC_Write_AIn_On_MUXn(SSMUXn, SSMUX_AINn);		/* AIn Sample Input Select on MUXn*/	
+				break;
+				case 2:		/* Select Sample Sequencer 2 */	
+					ADC0 -> SSMUX2 = ADC_Write_AIn_On_MUXn(SSMUXn, SSMUX_AINn);		/* AIn Sample Input Select on MUXn*/	
+				break;
+				default:	/* Select Sample Sequencer 3 */		
+					ADC0 -> SSMUX3 = ADC_Write_AIn_On_MUXn(SSMUXn, SSMUX_AINn);		/* AIn Sample Input Select on MUXn*/	
+				break;
+			}
+		}
+	}
+	else{					/* ADC Module 1 */
+		if(0 == ADC_SSn){
+			switch(SSMUXn){	
+				case 0:		/* Select Sample Sequencer 0 */	
+					ADC1 -> SSMUX0 = ADC_Write_AIn_On_MUXn(SSMUXn, SSMUX_AINn);		/* AIn Sample Input Select on MUXn*/	
+				break;
+				case 1:		/* Select Sample Sequencer 1 */		
+					ADC1 -> SSMUX1 = ADC_Write_AIn_On_MUXn(SSMUXn, SSMUX_AINn);		/* AIn Sample Input Select on MUXn*/	
+				break;
+				case 2:		/* Select Sample Sequencer 2 */	
+					ADC1 -> SSMUX2 = ADC_Write_AIn_On_MUXn(SSMUXn, SSMUX_AINn);		/* AIn Sample Input Select on MUXn*/	
+				break;
+				default:	/* Select Sample Sequencer 3 */		
+					ADC1 -> SSMUX3 = ADC_Write_AIn_On_MUXn(SSMUXn, SSMUX_AINn);		/* AIn Sample Input Select on MUXn*/	
+				break;
+			}
+		}
+	}
+}
+
+/* 
+*	ADC_Write_AIn_On_MUXn(SSMUXn_t SSMUXn,SSMUX_AINn_t SSMUX_AINn)
+*   
+*
+*/
+
+uint16_t ADC_Write_AIn_On_MUXn(SSMUXn_t SSMUXn, SSMUX_AINn_t SSMUX_AINn){
+	uint16_t valueReturn = 0;
+	switch(SSMUXn){
+		case 0:
+			valueReturn = (SSMUX_AINn << 0);
+		break;
+		case 1:
+			valueReturn = (SSMUX_AINn << 4);
+		break;
+		case 2:
+			valueReturn = (SSMUX_AINn << 8);
+		break;
+		case 3:
+			valueReturn = (SSMUX_AINn << 12);
+		break;
+		case 4:
+			valueReturn = (SSMUX_AINn << 16);
+		break;
+		case 5:
+			valueReturn = (SSMUX_AINn << 20);
+		break;
+		case 6:
+			valueReturn = (SSMUX_AINn << 24);
+		break;
+		default:
+			valueReturn = (SSMUX_AINn << 28);
+		break;
+	}
+	return valueReturn;
 }
 
 /* 

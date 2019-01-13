@@ -164,6 +164,32 @@ typedef enum {
 	GEN3
 } GENn_PWM_t;
 
+typedef enum {
+	SSMUX_AIN0 = 0,
+	SSMUX_AIN1,
+	SSMUX_AIN2,
+	SSMUX_AIN3,
+	SSMUX_AIN4,
+	SSMUX_AIN5,
+	SSMUX_AIN6,
+	SSMUX_AIN7,
+	SSMUX_AIN8,
+	SSMUX_AIN9,
+	SSMUX_AIN10,
+	SSMUX_AIN11	
+} SSMUX_AINn_t;
+
+typedef enum {
+	SSMUX0 = 0,
+	SSMUX1,
+	SSMUX2,
+	SSMUX3,
+	SSMUX4,
+	SSMUX5,
+	SSMUX6,
+	SSMUX7
+} SSMUXn_t;
+
 void ADC12_Enable(ADC_Enable_t);
 void ADC12_Disable(ADC_Disable_t);
 void ADC12_Init(ADC_Init_t *ADC_Init );
@@ -172,5 +198,6 @@ void ADC12_setSequencerPriority(ADC_MODn_t, ADC_SSn_t, ADC_SSPRIO_t);
 void ADC12_SampleSequencer_Config(ADC_MODn_t , ADC_SSn_t );
 void ADC12_Set_Trigger_Event(ADC_MODn_t, ADC_SSn_t , ADC_TRIGGER_EVENT_t);
 void ADC12_PWM_Trigger_Source_Sel(ADC_MODn_t, GENn_PWM_t, PWMn_MOD_t);
+void ADC_SS_Input_Multiplexer_Sel(ADC_MODn_t ADC_MODn,ADC_SSn_t ADC_SSn, SSMUXn_t SSMUXn, SSMUX_AINn_t SSMUX_AINn);
 
 #endif
