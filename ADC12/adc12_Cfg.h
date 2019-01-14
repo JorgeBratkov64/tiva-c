@@ -31,8 +31,8 @@ SOFTWARE.
 
 #include "adc12.h"
 
-extern ADC_Init_t ADC_Init;
-extern ADC_Deinit_t ADC_Deinit;
+/* extern ADC_Init_t ADC_Init;	*/
+/* extern ADC_Deinit_t ADC_Deinit;	*/
 
 
 #endif

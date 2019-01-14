@@ -39,7 +39,7 @@ uint16_t ADC_Write_AIn_On_MUXn(SSMUXn_t SSMUXn, SSMUX_AINn_t SSMUX_AINn);
 *
 */
 
-void ADC12_Init(ADC_Init_t *ADC_Init ){
+/* void ADC12_Init(ADC_Init_t *ADC_Init ){
 	SYSCTL -> RCGCADC |= ADC_Init -> ADC_Enable_Clock;
 	SYSCTL -> RCGCGPIO |= ADC_Init -> ADC_Ports;	
 	GPIOB -> AFSEL |= ADC_Init -> ADC_AFSEL_PORTB;
@@ -51,25 +51,27 @@ void ADC12_Init(ADC_Init_t *ADC_Init ){
 	GPIOB -> AMSEL |= ADC_Init ->ADC_AMSEL_PORTB;
 	GPIOD -> AMSEL |= ADC_Init ->ADC_AMSEL_PORTD;
 	GPIOE -> AMSEL |= ADC_Init ->ADC_AMSEL_PORTE;
-}
+} */
 
-///* 
-//*	ADC12_Denit()
-//*
-//*/
-//void ADC12_Deinit(ADC_Deinit_t *ADC_Deinit ){
-//	SYSCTL -> RCGCADC &= ADC_Deinit -> ADC_Module;
-//	SYSCTL -> RCGCGPIO &= ADC_Deinit -> ADC_Ports;	
-//	GPIOB -> AFSEL &= ADC_Deinit -> ADC_AFSEL_PORTB;
-//	GPIOD -> AFSEL &= ADC_Deinit -> ADC_AFSEL_PORTD;
-//	GPIOE -> AFSEL &= ADC_Deinit -> ADC_AFSEL_PORTE;
-//	GPIOB -> DEN &= ADC_Deinit -> ADC_CLEAR_DEN_PORTB;
-//	GPIOD -> DEN &= ADC_Deinit -> ADC_CLEAR_DEN_PORTD;
-//	GPIOE -> DEN &= ADC_Deinit -> ADC_CLEAR_DEN_PORTE;
-//	GPIOB -> AMSEL &= ADC_Deinit ->ADC_AMSEL_PORTB;
-//	GPIOD -> AMSEL &= ADC_Deinit ->ADC_AMSEL_PORTD;
-//	GPIOE -> AMSEL &= ADC_Deinit ->ADC_AMSEL_PORTE;
-//}
+/* 
+*	ADC12_Denit()
+*
+*/
+
+/* void ADC12_Deinit(ADC_Deinit_t *ADC_Deinit ){
+	SYSCTL -> RCGCADC &= ADC_Deinit -> ADC_Module;
+	SYSCTL -> RCGCGPIO &= ADC_Deinit -> ADC_Ports;	
+	GPIOB -> AFSEL &= ADC_Deinit -> ADC_AFSEL_PORTB;
+	GPIOD -> AFSEL &= ADC_Deinit -> ADC_AFSEL_PORTD;
+	GPIOE -> AFSEL &= ADC_Deinit -> ADC_AFSEL_PORTE;
+	GPIOB -> DEN &= ADC_Deinit -> ADC_CLEAR_DEN_PORTB;
+	GPIOD -> DEN &= ADC_Deinit -> ADC_CLEAR_DEN_PORTD;
+	GPIOE -> DEN &= ADC_Deinit -> ADC_CLEAR_DEN_PORTE;
+	GPIOB -> AMSEL &= ADC_Deinit ->ADC_AMSEL_PORTB;
+	GPIOD -> AMSEL &= ADC_Deinit ->ADC_AMSEL_PORTD;
+	GPIOE -> AMSEL &= ADC_Deinit ->ADC_AMSEL_PORTE;
+}
+*/
 
 /* 
 *	ADC12_EnableClockSource(ADC_Enable_Clock_t)

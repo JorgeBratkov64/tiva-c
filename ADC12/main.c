@@ -4,7 +4,7 @@
 
 
 int main(void){
-	ADC12_Init(&ADC_Init);
+	
 	
 	
 	

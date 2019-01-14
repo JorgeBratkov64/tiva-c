@@ -249,8 +249,8 @@ typedef enum{
 
 void ADC12_Enable_Clock_Source(ADC_Enable_Clock_t);
 void ADC12_Disable_Clock_Source(ADC_Disable_Clock_t);
-void ADC12_Init(ADC_Init_t *ADC_Init );
-void ADC12_Denit(ADC_Deinit_t *ADC_Deinit );
+/* void ADC12_Init(ADC_Init_t *ADC_Init );			*/
+/* void ADC12_Denit(ADC_Deinit_t *ADC_Deinit );		*/
 void ADC12_setSequencerPriority(ADC_MODn_t, ADC_SSn_t, ADC_SSPRIO_t);
 void ADC12_SampleSequencer_Config(ADC_MODn_t , ADC_SSn_t );
 void ADC12_Set_Trigger_Event(ADC_MODn_t, ADC_SSn_t , ADC_TRIGGER_EVENT_t);
