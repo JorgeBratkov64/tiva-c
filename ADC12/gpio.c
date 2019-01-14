@@ -103,6 +103,30 @@ void GPIO_Enable_Digital_Function(GPIO_PORTn_t GPIO_PORTn, GPIO_PINn_t GPIO_PINn
 	}
 }
 
+/* 
+*	GPIO_Disable_Analog_Isolation(GPIO_PORTn_t, GPIO_PINn_t)
+*
+*/
+
+void GPIO_Disable_Analog_Isolation(GPIO_PORTn_t GPIO_PORTn, GPIO_PINn_t GPIO_PINn){
+	switch(GPIO_PORTn){
+		case PORTB:			/* ADC inputs */
+			GPIOB -> AMSEL |= GPIO_PINn;
+		break;
+		case PORTC:			/* Analog comparators */
+			GPIOC -> AMSEL |= GPIO_PINn;
+		break;
+		case PORTD:			/* ADC inputs */
+			GPIOD -> AMSEL |= GPIO_PINn;
+		break;
+		case PORTE:			/* ADC inputs */
+			GPIOE -> AMSEL |= GPIO_PINn;
+		break;
+		default:
+		break;
+	}
+}
+
 
 
 
