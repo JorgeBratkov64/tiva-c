@@ -1,6 +1,6 @@
 /*
 
-TM4C123G ADC12 Driver
+TM4C123G adc12.c
 
 MIT License
 
@@ -40,7 +40,7 @@ uint16_t ADC_Write_AIn_On_MUXn(SSMUXn_t SSMUXn, SSMUX_AINn_t SSMUX_AINn);
 */
 
 void ADC12_Init(ADC_Init_t *ADC_Init ){
-	SYSCTL -> RCGCADC |= ADC_Init -> ADC_Module;
+	SYSCTL -> RCGCADC |= ADC_Init -> ADC_Enable_Clock;
 	SYSCTL -> RCGCGPIO |= ADC_Init -> ADC_Ports;	
 	GPIOB -> AFSEL |= ADC_Init -> ADC_AFSEL_PORTB;
 	GPIOD -> AFSEL |= ADC_Init -> ADC_AFSEL_PORTD;
@@ -53,39 +53,39 @@ void ADC12_Init(ADC_Init_t *ADC_Init ){
 	GPIOE -> AMSEL |= ADC_Init ->ADC_AMSEL_PORTE;
 }
 
+///* 
+//*	ADC12_Denit()
+//*
+//*/
+//void ADC12_Deinit(ADC_Deinit_t *ADC_Deinit ){
+//	SYSCTL -> RCGCADC &= ADC_Deinit -> ADC_Module;
+//	SYSCTL -> RCGCGPIO &= ADC_Deinit -> ADC_Ports;	
+//	GPIOB -> AFSEL &= ADC_Deinit -> ADC_AFSEL_PORTB;
+//	GPIOD -> AFSEL &= ADC_Deinit -> ADC_AFSEL_PORTD;
+//	GPIOE -> AFSEL &= ADC_Deinit -> ADC_AFSEL_PORTE;
+//	GPIOB -> DEN &= ADC_Deinit -> ADC_CLEAR_DEN_PORTB;
+//	GPIOD -> DEN &= ADC_Deinit -> ADC_CLEAR_DEN_PORTD;
+//	GPIOE -> DEN &= ADC_Deinit -> ADC_CLEAR_DEN_PORTE;
+//	GPIOB -> AMSEL &= ADC_Deinit ->ADC_AMSEL_PORTB;
+//	GPIOD -> AMSEL &= ADC_Deinit ->ADC_AMSEL_PORTD;
+//	GPIOE -> AMSEL &= ADC_Deinit ->ADC_AMSEL_PORTE;
+//}
+
 /* 
-*	ADC12_Denit()
-*
+*	ADC12_EnableClockSource(ADC_Enable_Clock_t)
+*	Gates clock to ADC module
 */
-void ADC12_Deinit(ADC_Deinit_t *ADC_Deinit ){
-	SYSCTL -> RCGCADC &= ADC_Deinit -> ADC_Module;
-	SYSCTL -> RCGCGPIO &= ADC_Deinit -> ADC_Ports;	
-	GPIOB -> AFSEL &= ADC_Deinit -> ADC_AFSEL_PORTB;
-	GPIOD -> AFSEL &= ADC_Deinit -> ADC_AFSEL_PORTD;
-	GPIOE -> AFSEL &= ADC_Deinit -> ADC_AFSEL_PORTE;
-	GPIOB -> DEN &= ADC_Deinit -> ADC_CLEAR_DEN_PORTB;
-	GPIOD -> DEN &= ADC_Deinit -> ADC_CLEAR_DEN_PORTD;
-	GPIOE -> DEN &= ADC_Deinit -> ADC_CLEAR_DEN_PORTE;
-	GPIOB -> AMSEL &= ADC_Deinit ->ADC_AMSEL_PORTB;
-	GPIOD -> AMSEL &= ADC_Deinit ->ADC_AMSEL_PORTD;
-	GPIOE -> AMSEL &= ADC_Deinit ->ADC_AMSEL_PORTE;
+
+void ADC12_Enable_Clock_Source(ADC_Enable_Clock_t ADC_Enable_Clock){
+	SYSCTL -> RCGCADC |= ADC_Enable_Clock;	
 }
 
 /* 
-*	ADC12_Enable()
-*	Enables the ADC clock		
-*/
-
-void ADC12_Enable(ADC_Enable_t ADCModule){
-	SYSCTL -> RCGCADC = ADCModule;	
-}
-
-/* 
-*	ADC12_Disable()
+*	ADC12_DisableClockSource(ADC_Disable_Clock_t)
 *   Disables the ADC clock
 */
-void ADC12_Disable(ADC_Disable_t ADCModule){
-	SYSCTL -> RCGCADC = ADCModule;	
+void ADC12_Disable_Clock_Source(ADC_Disable_Clock_t ADC_Disable_Clock){
+	SYSCTL -> RCGCADC &= ADC_Disable_Clock;	
 }
 
 /* 
@@ -97,32 +97,32 @@ void ADC12_setSequencerPriority(ADC_MODn_t ADC_MODn, ADC_SSn_t ADC_SSn, ADC_SSPR
 	if(ADC_MOD0 == ADC_MODn){
 		switch(ADC_SSn){
 			case ADC_SS0:
-				ADC0 -> SSPRI = ADC_SSPRIO;
+				ADC0 -> SSPRI |= ADC_SSPRIO;
 			break;
 			case ADC_SS1:
-				ADC0 -> SSPRI = (ADC_SSPRIO << FOUR);
+				ADC0 -> SSPRI |= (ADC_SSPRIO << FOUR);
 			break;
 			case ADC_SS3:
-				ADC0 -> SSPRI = (ADC_SSPRIO << EIGTH);
+				ADC0 -> SSPRI |= (ADC_SSPRIO << EIGTH);
 			break;
 			default:
-				ADC0 -> SSPRI = (ADC_SSPRIO << TWELVE);
+				ADC0 -> SSPRI |= (ADC_SSPRIO << TWELVE);
 			break;
 		}
 	}
 	else{
 		switch(ADC_SSn){
 			case ADC_SS0:
-				ADC1 -> SSPRI = ADC_SSPRIO;
+				ADC1 -> SSPRI |= ADC_SSPRIO;
 			break;
 			case ADC_SS1:
-				ADC1 -> SSPRI = (ADC_SSPRIO << FOUR);
+				ADC1 -> SSPRI |= (ADC_SSPRIO << FOUR);
 			break;
 			case ADC_SS3:
-				ADC1 -> SSPRI = (ADC_SSPRIO << EIGTH);
+				ADC1 -> SSPRI |= (ADC_SSPRIO << EIGTH);
 			break;
 			default:
-				ADC1 -> SSPRI = (ADC_SSPRIO << TWELVE);
+				ADC1 -> SSPRI |= (ADC_SSPRIO << TWELVE);
 			break;
 		}
 	}
@@ -137,32 +137,32 @@ void SS_Disable(ADC_MODn_t ADC_MODn, ADC_SSn_t ADC_SSn){
 	if(ADC_MOD0 == ADC_MODn){		/* ADC Module 0 */
 		switch(ADC_SSn){
 			case ADC_SS0:	/* Sample Sequencer 0	*/
-				ADC0 ->ACTSS = ~(ONE << ZERO);
+				ADC0 ->ACTSS &= ~(ONE << ZERO);
 			break;
 			case ADC_SS1:	/* Sample Sequencer 1	*/
-				ADC0 ->ACTSS = ~(ONE << ONE);
+				ADC0 ->ACTSS &= ~(ONE << ONE);
 			break;
 			case ADC_SS2:	/* Sample Sequencer 2	*/
-				ADC0 ->ACTSS = ~(ONE << TWO);
+				ADC0 ->ACTSS &= ~(ONE << TWO);
 			break;
 			default:		/* Sample Sequencer 3	*/
-				ADC0 ->ACTSS = ~(ONE << THREE);
+				ADC0 ->ACTSS &= ~(ONE << THREE);
 			break;
 		}
 	}
 	else{					/* ADC Module 1 */
 		switch(ADC_SSn){
 			case ADC_SS0:	/* Sample Sequencer 0	*/
-				ADC1 ->ACTSS = ~(ONE << ZERO);
+				ADC1 ->ACTSS &= ~(ONE << ZERO);
 			break;
 			case ADC_SS1:	/* Sample Sequencer 1	*/
-				ADC1 ->ACTSS = ~(ONE << ONE);
+				ADC1 ->ACTSS &= ~(ONE << ONE);
 			break;
 			case ADC_SS2:	/* Sample Sequencer 2	*/
-				ADC1 ->ACTSS = ~(ONE << TWO);
+				ADC1 ->ACTSS &= ~(ONE << TWO);
 			break;
 			default:		/* Sample Sequencer 3	*/
-				ADC1 ->ACTSS = ~(ONE << THREE);
+				ADC1 ->ACTSS &= ~(ONE << THREE);
 		}
 	}
 }
@@ -177,32 +177,32 @@ void ADC12_Set_Trigger_Event(ADC_MODn_t ADC_MODn, ADC_SSn_t ADC_SSn, ADC_TRIGGER
 	if(ADC_MOD0 == ADC_MODn){		/* ADC Module 0 */
 		switch(ADC_SSn){
 		case 0:		/* Sample Sequencer 0	*/
-			ADC0 -> EMUX = (ADC_TRIGER_EVENT << ZERO);
+			ADC0 -> EMUX |= (ADC_TRIGER_EVENT << ZERO);
 		break;
 		case 1:		/* Sample Sequencer 1	*/
-			ADC0 -> EMUX = (ADC_TRIGER_EVENT << FOUR);
+			ADC0 -> EMUX |= (ADC_TRIGER_EVENT << FOUR);
 		break;
 		case 2:		/* Sample Sequencer 2	*/
-			ADC0 -> EMUX = (ADC_TRIGER_EVENT << EIGTH);
+			ADC0 -> EMUX |= (ADC_TRIGER_EVENT << EIGTH);
 		break;
 		default:	/* Sample Sequencer 3	*/
-			ADC0 -> EMUX = (ADC_TRIGER_EVENT << TWELVE);
+			ADC0 -> EMUX |= (ADC_TRIGER_EVENT << TWELVE);
 		break;
 		}
 	}
 	else{
 		switch(ADC_SSn){	/* ADC Module 1 */
 		case 0:		/* Sample Sequencer 0	*/
-			ADC1 -> EMUX = (ADC_TRIGER_EVENT << ZERO);
+			ADC1 -> EMUX |= (ADC_TRIGER_EVENT << ZERO);
 		break;
 		case 1:		/* Sample Sequencer 1	*/
-			ADC1 -> EMUX = (ADC_TRIGER_EVENT << FOUR);
+			ADC1 -> EMUX |= (ADC_TRIGER_EVENT << FOUR);
 		break;
 		case 2:		/* Sample Sequencer 2	*/
-			ADC1 -> EMUX = (ADC_TRIGER_EVENT << EIGTH);
+			ADC1 -> EMUX |= (ADC_TRIGER_EVENT << EIGTH);
 		break;
 		default:	/* Sample Sequencer 3	*/
-			ADC1 -> EMUX = (ADC_TRIGER_EVENT << TWELVE);
+			ADC1 -> EMUX |= (ADC_TRIGER_EVENT << TWELVE);
 		break;
 		}
 	}
@@ -218,32 +218,32 @@ void ADC12_PWM_Trigger_Source_Sel(ADC_MODn_t ADC_MODn, GENn_PWM_t GENn_PWM, PWMn
 	if(ADC_MOD0 == ADC_MODn){		/* ADC Module 0 */
 		switch(GENn_PWM){	
 			case 0:
-				ADC0 -> TSSEL = (PWMn_MOD << FOUR);	/* Generator 0 PWM Module Trigger Select	*/	
+				ADC0 -> TSSEL |= (PWMn_MOD << FOUR);	/* Generator 0 PWM Module Trigger Select	*/	
 			break;
 			case 1:
-				ADC0 -> TSSEL = (PWMn_MOD << TWELVE);	/* Generator 1 PWM Module Trigger Select	*/
+				ADC0 -> TSSEL |= (PWMn_MOD << TWELVE);	/* Generator 1 PWM Module Trigger Select	*/
 			break;
 			case 2:
-				ADC0 -> TSSEL = (PWMn_MOD << TWENTY);	/* Generator 2 PWM Module Trigger Select	*/
+				ADC0 -> TSSEL |= (PWMn_MOD << TWENTY);	/* Generator 2 PWM Module Trigger Select	*/
 			break;
 			default:
-				ADC0 -> TSSEL = (PWMn_MOD << TWENTYEIGTH);	/* Generator 3 PWM Module Trigger Select	*/
+				ADC0 -> TSSEL |= (PWMn_MOD << TWENTYEIGTH);	/* Generator 3 PWM Module Trigger Select	*/
 			break;
 		}
 	}
 	else{					/* ADC Module 1 */
 		switch(GENn_PWM){	
 			case 0:
-				ADC1 -> TSSEL = (PWMn_MOD << FOUR);	/* Generator 0 PWM Module Trigger Select	*/	
+				ADC1 -> TSSEL |= (PWMn_MOD << FOUR);	/* Generator 0 PWM Module Trigger Select	*/	
 			break;
 			case 1:
-				ADC1 -> TSSEL = (PWMn_MOD << TWELVE);	/* Generator 1 PWM Module Trigger Select	*/	
+				ADC1 -> TSSEL |= (PWMn_MOD << TWELVE);	/* Generator 1 PWM Module Trigger Select	*/	
 			break;
 			case 2:
-				ADC1 -> TSSEL = (PWMn_MOD << TWENTY);	/* Generator 2 PWM Module Trigger Select	*/	
+				ADC1 -> TSSEL |= (PWMn_MOD << TWENTY);	/* Generator 2 PWM Module Trigger Select	*/	
 			break;
 			default:
-				ADC1 -> TSSEL = (PWMn_MOD << TWENTYEIGTH);	/* Generator 3 PWM Module Trigger Select	*/	
+				ADC1 -> TSSEL |= (PWMn_MOD << TWENTYEIGTH);	/* Generator 3 PWM Module Trigger Select	*/	
 			break;
 		}
 	}
@@ -260,16 +260,16 @@ void ADC_SS_Input_Multiplexer_Sel(ADC_MODn_t ADC_MODn, ADC_SSn_t ADC_SSn, SSMUXn
 		if(0 == ADC_SSn){
 			switch(SSMUXn){	
 				case 0:		/* Select Sample Sequencer 0 */	
-					ADC0 -> SSMUX0 = ADC_Write_AIn_On_MUXn(SSMUXn, SSMUX_AINn);		/* AIn Sample Input Select on MUXn*/	
+					ADC0 -> SSMUX0 |= ADC_Write_AIn_On_MUXn(SSMUXn, SSMUX_AINn);		/* AIn Sample Input Select on MUXn*/	
 				break;
 				case 1:		/* Select Sample Sequencer 1 */		
-					ADC0 -> SSMUX1 = ADC_Write_AIn_On_MUXn(SSMUXn, SSMUX_AINn);		/* AIn Sample Input Select on MUXn*/	
+					ADC0 -> SSMUX1 |= ADC_Write_AIn_On_MUXn(SSMUXn, SSMUX_AINn);		/* AIn Sample Input Select on MUXn*/	
 				break;
 				case 2:		/* Select Sample Sequencer 2 */	
-					ADC0 -> SSMUX2 = ADC_Write_AIn_On_MUXn(SSMUXn, SSMUX_AINn);		/* AIn Sample Input Select on MUXn*/	
+					ADC0 -> SSMUX2 |= ADC_Write_AIn_On_MUXn(SSMUXn, SSMUX_AINn);		/* AIn Sample Input Select on MUXn*/	
 				break;
 				default:	/* Select Sample Sequencer 3 */		
-					ADC0 -> SSMUX3 = ADC_Write_AIn_On_MUXn(SSMUXn, SSMUX_AINn);		/* AIn Sample Input Select on MUXn*/	
+					ADC0 -> SSMUX3 |= ADC_Write_AIn_On_MUXn(SSMUXn, SSMUX_AINn);		/* AIn Sample Input Select on MUXn*/	
 				break;
 			}
 		}
@@ -278,16 +278,16 @@ void ADC_SS_Input_Multiplexer_Sel(ADC_MODn_t ADC_MODn, ADC_SSn_t ADC_SSn, SSMUXn
 		if(0 == ADC_SSn){
 			switch(SSMUXn){	
 				case 0:		/* Select Sample Sequencer 0 */	
-					ADC1 -> SSMUX0 = ADC_Write_AIn_On_MUXn(SSMUXn, SSMUX_AINn);		/* AIn Sample Input Select on MUXn*/	
+					ADC1 -> SSMUX0 |= ADC_Write_AIn_On_MUXn(SSMUXn, SSMUX_AINn);		/* AIn Sample Input Select on MUXn*/	
 				break;
 				case 1:		/* Select Sample Sequencer 1 */		
-					ADC1 -> SSMUX1 = ADC_Write_AIn_On_MUXn(SSMUXn, SSMUX_AINn);		/* AIn Sample Input Select on MUXn*/	
+					ADC1 -> SSMUX1 |= ADC_Write_AIn_On_MUXn(SSMUXn, SSMUX_AINn);		/* AIn Sample Input Select on MUXn*/	
 				break;
 				case 2:		/* Select Sample Sequencer 2 */	
-					ADC1 -> SSMUX2 = ADC_Write_AIn_On_MUXn(SSMUXn, SSMUX_AINn);		/* AIn Sample Input Select on MUXn*/	
+					ADC1 -> SSMUX2 |= ADC_Write_AIn_On_MUXn(SSMUXn, SSMUX_AINn);		/* AIn Sample Input Select on MUXn*/	
 				break;
 				default:	/* Select Sample Sequencer 3 */		
-					ADC1 -> SSMUX3 = ADC_Write_AIn_On_MUXn(SSMUXn, SSMUX_AINn);		/* AIn Sample Input Select on MUXn*/	
+					ADC1 -> SSMUX3 |= ADC_Write_AIn_On_MUXn(SSMUXn, SSMUX_AINn);		/* AIn Sample Input Select on MUXn*/	
 				break;
 			}
 		}

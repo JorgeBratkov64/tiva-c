@@ -1,3 +1,31 @@
+/*
+
+TM4C123G adc12.h
+
+MIT License
+
+Copyright (c) 2018 JorgeBratkov64
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+*/
+
 #ifndef __ADC12_H
 #define __ADC12_H
 
@@ -83,16 +111,13 @@ typedef enum{
 	ENABLE_ADC_MODULE0 = 1,
 	ENABLE_ADC_MODULE1,
 	ENABLE_ADC_BOTH,
-	DISABLE_ADC = 0,
-	DISABLE_ADC_MOD1,
-	DISABLE_ADC_MOD0
-} ADC_Enable_t;
+} ADC_Enable_Clock_t;
 
 typedef enum{
 	DISABLE_ADC_MODULE0 = 2,
 	DISABLE_ADC_MODULE1 = 1,
 	DISABLE_ADC_BOTH = 0 
-} ADC_Disable_t;
+} ADC_Disable_Clock_t;
 
 typedef enum{
 	ADC_PORT_CHANNELS_DISABLE = 0,
@@ -102,7 +127,7 @@ typedef enum{
 } ADC_Port_Clock_t;
 	
 typedef struct ADC_Init_t{
-	ADC_Enable_t ADC_Module;				/* Enable ADC clock */ 
+	ADC_Enable_Clock_t ADC_Enable_Clock;	/* Enable ADC clock */ 
 	ADC_Port_Clock_t ADC_Ports;				/* Enable the clock to appropiate GPIO modules */
 	ADC_AFSEL_PORTB_t ADC_AFSEL_PORTB;		/* Select alternative function GPIO port B pins */
 	ADC_AFSEL_PORTD_t ADC_AFSEL_PORTD;		/* Select alternative function GPIO port D pins */
@@ -222,8 +247,8 @@ typedef enum{
 } SSCTRLF_t;
 
 
-void ADC12_Enable(ADC_Enable_t);
-void ADC12_Disable(ADC_Disable_t);
+void ADC12_Enable_Clock_Source(ADC_Enable_Clock_t);
+void ADC12_Disable_Clock_Source(ADC_Disable_Clock_t);
 void ADC12_Init(ADC_Init_t *ADC_Init );
 void ADC12_Denit(ADC_Deinit_t *ADC_Deinit );
 void ADC12_setSequencerPriority(ADC_MODn_t, ADC_SSn_t, ADC_SSPRIO_t);
