@@ -74,6 +74,7 @@ typedef enum{
 void GPIO_Enable_Clock_Source(GPIO_Enable_Port_t );
 void GPIO_Disable_Clock_Source(GPIO_Disable_Port_t );
 void GPIO_Set_Alternate_Function(GPIO_PORTn_t , GPIO_PINn_t );
+void GPIO_Enable_Digital_Function(GPIO_PORTn_t, GPIO_PINn_t );
 
 
 #endif
