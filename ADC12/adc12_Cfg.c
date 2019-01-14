@@ -1,8 +1,36 @@
+/*
+
+TM4C123G adc12_Cfg.c
+
+MIT License
+
+Copyright (c) 2018 JorgeBratkov64
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+*/
+
 #include "adc12.h"
 
 ADC_Init_t ADC_Init = {
 	ENABLE_ADC_MODULE0, 		/* ADC_Module  	ENABLE_ADC_MODULE0, ENABLE_ADC_MODULE1, ENABLE_ADC_BOTH*/
-	ADC_PORT_CHANNELS_DISABLE,	 /* ADC_Ports  	ADC_PORT_CHANNELS_DISABLE = 0, ADC_PORTB_CHANNELS, ADC_PORTD_CHANNELS, ADC_PORTE_CHANNELS*/
+	ADC_PORTB_CHANNELS,	/* ADC_Ports  	ADC_PORT_CHANNELS_DISABLE = 0, ADC_PORTB_CHANNELS, ADC_PORTD_CHANNELS, ADC_PORTE_CHANNELS*/
 	ADC_AFSEL_DISABLE,		/* ADC_PORTB  ADC_AFSEL_AIN10, ADC_AFSEL_AIN11*/
 	ADC_AFSEL_DISABLE,		/* ADC_PORTD ADC_AFSEL_AIN7, ADC_AFSEL_AIN6, ADC_AFSEL_AIN5, ADC_AFSEL_AIN4 */
 	ADC_AFSEL_DISABLE,		/* ADC_PORTE ADC_AFSEL_AIN3, ADC_AFSEL_AIN2, ADC_AFSEL_AIN1, ADC_AFSEL_AIN0, ADC_AFSEL_AIN9, ADC_AFSEL_AIN8 */
