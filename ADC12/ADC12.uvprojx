@@ -397,6 +397,31 @@
               <FileType>5</FileType>
               <FilePath>.\adc12.h</FilePath>
             </File>
+            <File>
+              <FileName>adc12_Cfg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\adc12_Cfg.c</FilePath>
+            </File>
+            <File>
+              <FileName>adc12_Cfg.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\adc12_Cfg.h</FilePath>
+            </File>
+            <File>
+              <FileName>definitions.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\definitions.h</FilePath>
+            </File>
+            <File>
+              <FileName>gpio.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\gpio.c</FilePath>
+            </File>
+            <File>
+              <FileName>gpio.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\gpio.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
