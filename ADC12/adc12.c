@@ -43,8 +43,8 @@ uint16_t ADC_Write_AIn_On_MUXn(SSMUXn_t SSMUXn, SSMUX_AINn_t SSMUX_AINn);
 	SYSCTL -> RCGCADC |= ADC_Init -> ADC_Enable_Clock;
 	SYSCTL -> RCGCGPIO |= ADC_Init -> ADC_Ports;	
 	GPIOB -> AFSEL |= ADC_Init -> ADC_AFSEL_PORTB;
-	GPIOD -> AFSEL |= ADC_Init -> ADC_AFSEL_PORTD;
-	GPIOE -> AFSEL |= ADC_Init -> ADC_AFSEL_PORTE;
+	GPIOD -> AFSELE |= ADC_Init -> ADC_AFSEL_PORTD;
+	GPIOE -> AFSL |= ADC_Init -> ADC_AFSEL_PORTE;
 	GPIOB -> DEN |= ADC_Init -> ADC_CLEAR_DEN_PORTB;
 	GPIOD -> DEN |= ADC_Init -> ADC_CLEAR_DEN_PORTD;
 	GPIOE -> DEN |= ADC_Init -> ADC_CLEAR_DEN_PORTE;
@@ -95,7 +95,7 @@ void ADC12_Disable_Clock_Source(ADC_Disable_Clock_t ADC_Disable_Clock){
 *   Sets the priority ADC_SSPRIO_t for the ADC sequencer ADC_SSn_t for the ADC module ADC_MODn_t
 *
 */
-void ADC12_setSequencerPriority(ADC_MODn_t ADC_MODn, ADC_SSn_t ADC_SSn, ADC_SSPRIO_t ADC_SSPRIO){
+void ADC12_Set_Sequencer_Priority(ADC_MODn_t ADC_MODn, ADC_SSn_t ADC_SSn, ADC_SSPRIO_t ADC_SSPRIO){
 	if(ADC_MOD0 == ADC_MODn){
 		switch(ADC_SSn){
 			case ADC_SS0:
@@ -131,11 +131,11 @@ void ADC12_setSequencerPriority(ADC_MODn_t ADC_MODn, ADC_SSn_t ADC_SSn, ADC_SSPR
 }
 
 /* 
-*	SS_Disable(ADC_MODn_t, ADC_SSn_t)
+*	Sample_Sequencer_Disable(ADC_MODn_t, ADC_SSn_t)
 *   
 *
 */
-void SS_Disable(ADC_MODn_t ADC_MODn, ADC_SSn_t ADC_SSn){
+void ADC12_Sample_Sequencer_Disable(ADC_MODn_t ADC_MODn, ADC_SSn_t ADC_SSn){
 	if(ADC_MOD0 == ADC_MODn){		/* ADC Module 0 */
 		switch(ADC_SSn){
 			case ADC_SS0:	/* Sample Sequencer 0	*/
@@ -165,6 +165,46 @@ void SS_Disable(ADC_MODn_t ADC_MODn, ADC_SSn_t ADC_SSn){
 			break;
 			default:		/* Sample Sequencer 3	*/
 				ADC1 ->ACTSS &= ~(ONE << THREE);
+		}
+	}
+}
+
+/* 
+*	Sample_Sequencer_Enable(ADC_MODn_t, ADC_SSn_t)
+*   
+*
+*/
+void ADC12_Sample_Sequencer_Enable(ADC_MODn_t ADC_MODn, ADC_SSn_t ADC_SSn){
+	if (ADC_MOD0 == ADC_MODn){		/* ADC Module 0 */
+		switch(ADC_SSn){
+			case ADC_SS0:			/* Sample Sequencer 0	*/
+				ADC0 -> ACTSS |= ONE << ZERO;
+			break;
+			case ADC_SS1:			/* Sample Sequencer 1	*/
+				ADC0 -> ACTSS |= ONE << ONE;
+			break;
+			case ADC_SS2:			/* Sample Sequencer 2	*/
+				ADC0 -> ACTSS |= ONE << TWO;
+			break;
+			default:				/* Sample Sequencer 3	*/
+				ADC0 -> ACTSS |= ONE << THREE;
+			break;			
+		}
+	}
+	else{
+		switch(ADC_SSn){			/* ADC Module 1 */
+			case ADC_SS0:			/* Sample Sequencer 0	*/
+				ADC1 -> ACTSS |= ONE << ZERO;
+			break;
+			case ADC_SS1:			/* Sample Sequencer 1	*/
+				ADC1 -> ACTSS |= ONE << ZERO;
+			break;
+			case ADC_SS2:			/* Sample Sequencer 2	*/
+				ADC1 -> ACTSS |= ONE << ZERO;
+			break;
+			default:				/* Sample Sequencer 3	*/
+				ADC1 -> ACTSS |= ONE << ZERO;
+			break;			
 		}
 	}
 }
@@ -257,7 +297,7 @@ void ADC12_PWM_Trigger_Source_Sel(ADC_MODn_t ADC_MODn, GENn_PWM_t GENn_PWM, PWMn
 *
 */
 
-void ADC_SS_Input_Multiplexer_Sel(ADC_MODn_t ADC_MODn, ADC_SSn_t ADC_SSn, SSMUXn_t SSMUXn, SSMUX_AINn_t SSMUX_AINn){
+void ADC12_SS_Input_Multiplexer_Sel(ADC_MODn_t ADC_MODn, ADC_SSn_t ADC_SSn, SSMUXn_t SSMUXn, SSMUX_AINn_t SSMUX_AINn){
 	if(ADC_MOD0 == ADC_MODn){		/* ADC Module 0 */
 		if(0 == ADC_SSn){
 			switch(SSMUXn){	
@@ -646,45 +686,5 @@ void ADC12_Interrupt_Mask(ADC_MODn_t ADC_MODn ){
 	
 }
 
-/* 
-*	ADC12_Enable_SS_Logic(ADC_MODn_t, ADC_SSn_t)
-*   
-*
-*/
 
-void ADC12_Enable_SS_Logic(ADC_MODn_t ADC_MODn, ADC_SSn_t ADC_SSn){
-	if (ADC_MOD0 == ADC_MODn){
-		switch(ADC_SSn){
-			case ADC_SS0:
-				ADC0 -> ACTSS |= ONE << ZERO;
-			break;
-			case ADC_SS1:
-				ADC0 -> ACTSS |= ONE << ONE;
-			break;
-			case ADC_SS2:
-				ADC0 -> ACTSS |= ONE << TWO;
-			break;
-			default:
-				ADC0 -> ACTSS |= ONE << THREE;
-			break;			
-		}
-	}
-	else{
-		switch(ADC_SSn){
-			case ADC_SS0:
-				ADC1 -> ACTSS |= ONE << ZERO;
-			break;
-			case ADC_SS1:
-				ADC1 -> ACTSS |= ONE << ZERO;
-			break;
-			case ADC_SS2:
-				ADC1 -> ACTSS |= ONE << ZERO;
-			break;
-			default:
-				ADC1 -> ACTSS |= ONE << ZERO;
-			break;			
-		}
-	}
-	
-}
 
