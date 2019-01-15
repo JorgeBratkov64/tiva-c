@@ -76,7 +76,7 @@ void GPIO_Set_Alternate_Function(GPIO_PORTn_t GPIO_PORTn, GPIO_PINn_t GPIO_PINn)
 }
 
 /* 
-*	GPIO_Disable_Digital_Function(GPIO_PORTn_t, GPIO_PINn_t)
+*	GPIO_Enable_Digital_Function(GPIO_PORTn_t, GPIO_PINn_t)
 *
 */
 
@@ -99,6 +99,34 @@ void GPIO_Enable_Digital_Function(GPIO_PORTn_t GPIO_PORTn, GPIO_PINn_t GPIO_PINn
 		break;
 		default:			/* GPIO PORTF */
 			GPIOF -> DEN |= GPIO_PINn;		/* Digital function on PFn*/
+		break;
+	}
+}
+
+/* 
+*	GPIO_Disable_Digital_Function(GPIO_PORTn_t, GPIO_PINn_t)
+*
+*/
+
+void GPIO_Disable_Digital_Function(GPIO_PORTn_t GPIO_PORTn, GPIO_PINn_t GPIO_PINn){
+	switch(GPIO_PORTn){
+		case PORTA:			/* GPIO PORTA */
+			GPIOA -> DEN &= ~(GPIO_PINn);		/* Digital function on PAn*/
+		break;
+		case PORTB:			/* GPIO PORTB */
+			GPIOB -> DEN &= ~(GPIO_PINn);		/* Digital function on PBn*/
+		break;
+		case PORTC:			/* GPIO PORTC */
+			GPIOC -> DEN &= ~(GPIO_PINn);		/* Digital function on PCn*/
+		break;
+		case PORTD:			/* GPIO PORTD */
+			GPIOD -> DEN &= ~(GPIO_PINn);		/* Digital function on PDn*/
+		break;
+		case PORTE:			/* GPIO PORTE */
+			GPIOE -> DEN &= ~(GPIO_PINn);		/* Digital function on PEn*/
+		break;
+		default:			/* GPIO PORTF */
+			GPIOF -> DEN &= ~(GPIO_PINn);		/* Digital function on PFn*/
 		break;
 	}
 }

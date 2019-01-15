@@ -26,7 +26,7 @@ SOFTWARE.
 
 */
 
-#include "adc12.h"
+// #include "adc12.h"
 
 //ADC_Init_t ADC_Init = {
 //	ENABLE_ADC_MODULE0, 		/* ADC_Module  	ENABLE_ADC_MODULE0, ENABLE_ADC_MODULE1, ENABLE_ADC_BOTH*/
