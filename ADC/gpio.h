@@ -34,6 +34,7 @@ SOFTWARE.
 
 
 typedef struct GPIO_Port{
+	uint32_t sysRcgc2Reg;
 	uint32_t gpioDirReg;
 	uint32_t gpioIntSenseReg;
 	uint32_t gpioIntBothEdgeReg;

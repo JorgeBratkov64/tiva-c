@@ -31,8 +31,11 @@ SOFTWARE.
 #include "gpio.h"
 
 void gpioInit(GPIO_Port_t *GPIO_Port, GPIO_PORTn_t GPIO_PORTn){
+	volatile uint32_t delay = 0;
 	switch(GPIO_PORTn){
 		case PORT_A:			/* GPIO Port A	*/
+			SYSCTL -> RCGC2 = GPIO_Port -> sysRcgc2Reg;
+			delay = GPIO_Port -> sysRcgc2Reg;
 			GPIOA -> DIR = GPIO_Port -> gpioDirReg;
 			GPIOA -> IS = GPIO_Port -> gpioIntSenseReg;
 			GPIOA -> IBE = GPIO_Port -> gpioIntBothEdgeReg;
@@ -54,6 +57,8 @@ void gpioInit(GPIO_Port_t *GPIO_Port, GPIO_PORTn_t GPIO_PORTn){
 			GPIOA -> DMACTL = GPIO_Port -> gpioDMACtrlReg;
 		break;
 		case PORT_B:			/* GPIO Port B	*/
+			SYSCTL -> RCGC2 = GPIO_Port -> sysRcgc2Reg;
+			delay = GPIO_Port -> sysRcgc2Reg;
 			GPIOB -> DIR = GPIO_Port -> gpioDirReg;
 			GPIOB -> IS = GPIO_Port -> gpioIntSenseReg;
 			GPIOB -> IBE = GPIO_Port -> gpioIntBothEdgeReg;
@@ -75,6 +80,8 @@ void gpioInit(GPIO_Port_t *GPIO_Port, GPIO_PORTn_t GPIO_PORTn){
 			GPIOB -> DMACTL = GPIO_Port -> gpioDMACtrlReg;
 		break;
 		case PORT_C:			/* GPIO Port C	*/
+			SYSCTL -> RCGC2 = GPIO_Port -> sysRcgc2Reg;
+			delay = GPIO_Port -> sysRcgc2Reg;
 			GPIOC -> DIR = GPIO_Port -> gpioDirReg;
 			GPIOC -> IS = GPIO_Port -> gpioIntSenseReg;
 			GPIOC -> IBE = GPIO_Port -> gpioIntBothEdgeReg;
@@ -96,6 +103,8 @@ void gpioInit(GPIO_Port_t *GPIO_Port, GPIO_PORTn_t GPIO_PORTn){
 			GPIOC -> DMACTL = GPIO_Port -> gpioDMACtrlReg;
 		break;
 		case PORT_D:			/* GPIO Port D	*/
+			SYSCTL -> RCGC2 = GPIO_Port -> sysRcgc2Reg;
+			delay = GPIO_Port -> sysRcgc2Reg;
 			GPIOD -> DIR = GPIO_Port -> gpioDirReg;
 			GPIOD -> IS = GPIO_Port -> gpioIntSenseReg;
 			GPIOD -> IBE = GPIO_Port -> gpioIntBothEdgeReg;
@@ -117,6 +126,8 @@ void gpioInit(GPIO_Port_t *GPIO_Port, GPIO_PORTn_t GPIO_PORTn){
 			GPIOD -> DMACTL = GPIO_Port -> gpioDMACtrlReg;
 		break;
 		case PORT_E:			/* GPIO Port E	*/
+			SYSCTL -> RCGC2 = GPIO_Port -> sysRcgc2Reg;
+			delay = GPIO_Port -> sysRcgc2Reg;
 			GPIOE -> DIR = GPIO_Port -> gpioDirReg;
 			GPIOE -> IS = GPIO_Port -> gpioIntSenseReg;
 			GPIOE -> IBE = GPIO_Port -> gpioIntBothEdgeReg;
@@ -138,6 +149,8 @@ void gpioInit(GPIO_Port_t *GPIO_Port, GPIO_PORTn_t GPIO_PORTn){
 			GPIOE -> DMACTL = GPIO_Port -> gpioDMACtrlReg;
 		break;
 		case PORT_F:			/* GPIO Port F	*/
+			SYSCTL -> RCGC2 = GPIO_Port -> sysRcgc2Reg;
+			delay = GPIO_Port -> sysRcgc2Reg;
 			GPIOF -> DIR = GPIO_Port -> gpioDirReg;
 			GPIOF -> IS = GPIO_Port -> gpioIntSenseReg;
 			GPIOF -> IBE = GPIO_Port -> gpioIntBothEdgeReg;
