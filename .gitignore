@@ -1,6 +1,8 @@
 *.o
 *.crf
 *.d
-/Objects/.o
-/Objects/.d
-/Objects/.crf
+*.map
+*.iex
+*.dep
+*.lnp
+*.axf
