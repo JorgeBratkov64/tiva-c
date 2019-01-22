@@ -228,7 +228,10 @@
                                             // Status and Clear
 #define ADC_DCISC_DCINT0        0x00000001  // Digital Comparator 0 Interrupt
                                             // Status and Clear
-
+											
+#define ADC_DCISC_DCINTNULL     0x00000000  // Null value
+                                            // Status and Clear
+											
 //*****************************************************************************
 //
 // The following are defines for the bit fields in the ADC_O_CTL register.
@@ -244,14 +247,14 @@
 // The following are defines for the bit fields in the ADC_O_SSMUX0 register.
 //
 //*****************************************************************************
-#define ADC_SSMUX0_MUX7_M       0xF0000000  // 8th Sample Input Select
-#define ADC_SSMUX0_MUX6_M       0x0F000000  // 7th Sample Input Select
-#define ADC_SSMUX0_MUX5_M       0x00F00000  // 6th Sample Input Select
-#define ADC_SSMUX0_MUX4_M       0x000F0000  // 5th Sample Input Select
-#define ADC_SSMUX0_MUX3_M       0x0000F000  // 4th Sample Input Select
-#define ADC_SSMUX0_MUX2_M       0x00000F00  // 3rd Sample Input Select
-#define ADC_SSMUX0_MUX1_M       0x000000F0  // 2nd Sample Input Select
-#define ADC_SSMUX0_MUX0_M       0x0000000F  // 1st Sample Input Select
+#define ADC_SSMUX0_MUX7_M       0xF0000000U  // 8th Sample Input Select
+#define ADC_SSMUX0_MUX6_M       0x0F000000U  // 7th Sample Input Select
+#define ADC_SSMUX0_MUX5_M       0x00F00000U  // 6th Sample Input Select
+#define ADC_SSMUX0_MUX4_M       0x000F0000U  // 5th Sample Input Select
+#define ADC_SSMUX0_MUX3_M       0x0000F000U  // 4th Sample Input Select
+#define ADC_SSMUX0_MUX2_M       0x00000F00U  // 3rd Sample Input Select
+#define ADC_SSMUX0_MUX1_M       0x000000F0U  // 2nd Sample Input Select
+#define ADC_SSMUX0_MUX0_M       0x0000000FU  // 1st Sample Input Select
 #define ADC_SSMUX0_MUX7_S       28
 #define ADC_SSMUX0_MUX6_S       24
 #define ADC_SSMUX0_MUX5_S       20
@@ -340,28 +343,33 @@
                                             // Operation
 #define ADC_SSOP0_S0DCOP        0x00000001  // Sample 0 Digital Comparator
                                             // Operation
+#define ADC_SSOP0_NULL          0x00000000  // Sample 0 Digital Comparator
+                                            // Operation
 
 //*****************************************************************************
 //
 // The following are defines for the bit fields in the ADC_O_SSDC0 register.
 //
 //*****************************************************************************
-#define ADC_SSDC0_S7DCSEL_M     0xF0000000  // Sample 7 Digital Comparator
+#define ADC_SSDC0_S7DCSEL_M     0xF0000000U  // Sample 7 Digital Comparator
                                             // Select
-#define ADC_SSDC0_S6DCSEL_M     0x0F000000  // Sample 6 Digital Comparator
+#define ADC_SSDC0_S6DCSEL_M     0x0F000000U  // Sample 6 Digital Comparator
                                             // Select
-#define ADC_SSDC0_S5DCSEL_M     0x00F00000  // Sample 5 Digital Comparator
+#define ADC_SSDC0_S5DCSEL_M     0x00F00000U  // Sample 5 Digital Comparator
                                             // Select
-#define ADC_SSDC0_S4DCSEL_M     0x000F0000  // Sample 4 Digital Comparator
+#define ADC_SSDC0_S4DCSEL_M     0x000F0000U  // Sample 4 Digital Comparator
                                             // Select
-#define ADC_SSDC0_S3DCSEL_M     0x0000F000  // Sample 3 Digital Comparator
+#define ADC_SSDC0_S3DCSEL_M     0x0000F000U  // Sample 3 Digital Comparator
                                             // Select
-#define ADC_SSDC0_S2DCSEL_M     0x00000F00  // Sample 2 Digital Comparator
+#define ADC_SSDC0_S2DCSEL_M     0x00000F00U  // Sample 2 Digital Comparator
                                             // Select
-#define ADC_SSDC0_S1DCSEL_M     0x000000F0  // Sample 1 Digital Comparator
+#define ADC_SSDC0_S1DCSEL_M     0x000000F0U  // Sample 1 Digital Comparator
                                             // Select
-#define ADC_SSDC0_S0DCSEL_M     0x0000000F  // Sample 0 Digital Comparator
+#define ADC_SSDC0_S0DCSEL_M     0x0000000FU  // Sample 0 Digital Comparator
                                             // Select
+#define ADC_SSDC0_NULL_M     0x00000000U  // Sample 0 Digital Comparator
+                                            // Select											
+#define ADC_SSDC0_S7DCSEL_S     28										
 #define ADC_SSDC0_S6DCSEL_S     24
 #define ADC_SSDC0_S5DCSEL_S     20
 #define ADC_SSDC0_S4DCSEL_S     16
@@ -439,20 +447,24 @@
                                             // Operation
 #define ADC_SSOP1_S0DCOP        0x00000001  // Sample 0 Digital Comparator
                                             // Operation
+#define ADC_SSOP1_NULL          0x00000000  // Sample 0 Digital Comparator
+                                            // Operation
 
 //*****************************************************************************
 //
 // The following are defines for the bit fields in the ADC_O_SSDC1 register.
 //
 //*****************************************************************************
-#define ADC_SSDC1_S3DCSEL_M     0x0000F000  // Sample 3 Digital Comparator
+#define ADC_SSDC1_S3DCSEL_M     0x0000F000U  // Sample 3 Digital Comparator
                                             // Select
-#define ADC_SSDC1_S2DCSEL_M     0x00000F00  // Sample 2 Digital Comparator
+#define ADC_SSDC1_S2DCSEL_M     0x00000F00U  // Sample 2 Digital Comparator
                                             // Select
-#define ADC_SSDC1_S1DCSEL_M     0x000000F0  // Sample 1 Digital Comparator
+#define ADC_SSDC1_S1DCSEL_M     0x000000F0U  // Sample 1 Digital Comparator
                                             // Select
-#define ADC_SSDC1_S0DCSEL_M     0x0000000F  // Sample 0 Digital Comparator
+#define ADC_SSDC1_S0DCSEL_M     0x0000000FU  // Sample 0 Digital Comparator
                                             // Select
+#define ADC_SSDC1_NULL_M     	0x00000000U  // Sample 0 Digital Comparator
+                                            // Select											
 #define ADC_SSDC1_S2DCSEL_S     8
 #define ADC_SSDC1_S1DCSEL_S     4
 #define ADC_SSDC1_S0DCSEL_S     0
@@ -462,10 +474,10 @@
 // The following are defines for the bit fields in the ADC_O_SSMUX2 register.
 //
 //*****************************************************************************
-#define ADC_SSMUX2_MUX3_M       0x0000F000  // 4th Sample Input Select
-#define ADC_SSMUX2_MUX2_M       0x00000F00  // 3rd Sample Input Select
-#define ADC_SSMUX2_MUX1_M       0x000000F0  // 2nd Sample Input Select
-#define ADC_SSMUX2_MUX0_M       0x0000000F  // 1st Sample Input Select
+#define ADC_SSMUX2_MUX3_M       0x0000F000U  // 4th Sample Input Select
+#define ADC_SSMUX2_MUX2_M       0x00000F00U  // 3rd Sample Input Select
+#define ADC_SSMUX2_MUX1_M       0x000000F0U  // 2nd Sample Input Select
+#define ADC_SSMUX2_MUX0_M       0x0000000FU  // 1st Sample Input Select
 #define ADC_SSMUX2_MUX3_S       12
 #define ADC_SSMUX2_MUX2_S       8
 #define ADC_SSMUX2_MUX1_S       4
@@ -526,20 +538,24 @@
                                             // Operation
 #define ADC_SSOP2_S0DCOP        0x00000001  // Sample 0 Digital Comparator
                                             // Operation
+#define ADC_SSOP2_NULL          0x00000000  // Sample 0 Digital Comparator
+                                            // Operation
 
 //*****************************************************************************
 //
 // The following are defines for the bit fields in the ADC_O_SSDC2 register.
 //
 //*****************************************************************************
-#define ADC_SSDC2_S3DCSEL_M     0x0000F000  // Sample 3 Digital Comparator
+#define ADC_SSDC2_S3DCSEL_M     0x0000F000U  // Sample 3 Digital Comparator
                                             // Select
-#define ADC_SSDC2_S2DCSEL_M     0x00000F00  // Sample 2 Digital Comparator
+#define ADC_SSDC2_S2DCSEL_M     0x00000F00U  // Sample 2 Digital Comparator
                                             // Select
-#define ADC_SSDC2_S1DCSEL_M     0x000000F0  // Sample 1 Digital Comparator
+#define ADC_SSDC2_S1DCSEL_M     0x000000F0U  // Sample 1 Digital Comparator
                                             // Select
-#define ADC_SSDC2_S0DCSEL_M     0x0000000F  // Sample 0 Digital Comparator
+#define ADC_SSDC2_S0DCSEL_M     0x0000000FU  // Sample 0 Digital Comparator
                                             // Select
+#define ADC_SSDC2_NULL_M     	0x00000000U  // Sample 0 Digital Comparator
+                                            // Select	
 #define ADC_SSDC2_S2DCSEL_S     8
 #define ADC_SSDC2_S1DCSEL_S     4
 #define ADC_SSDC2_S0DCSEL_S     0
@@ -549,7 +565,7 @@
 // The following are defines for the bit fields in the ADC_O_SSMUX3 register.
 //
 //*****************************************************************************
-#define ADC_SSMUX3_MUX0_M       0x0000000F  // 1st Sample Input Select
+#define ADC_SSMUX3_MUX0_M       0x0000000FU  // 1st Sample Input Select
 #define ADC_SSMUX3_MUX0_S       0
 
 //*****************************************************************************
@@ -567,7 +583,7 @@
 // The following are defines for the bit fields in the ADC_O_SSFIFO3 register.
 //
 //*****************************************************************************
-#define ADC_SSFIFO3_DATA_M      0x00000FFF  // Conversion Result Data
+#define ADC_SSFIFO3_DATA_M      0x00000FFFU  // Conversion Result Data
 #define ADC_SSFIFO3_DATA_S      0
 
 //*****************************************************************************
@@ -575,10 +591,10 @@
 // The following are defines for the bit fields in the ADC_O_SSFSTAT3 register.
 //
 //*****************************************************************************
-#define ADC_SSFSTAT3_FULL       0x00001000  // FIFO Full
-#define ADC_SSFSTAT3_EMPTY      0x00000100  // FIFO Empty
-#define ADC_SSFSTAT3_HPTR_M     0x000000F0  // FIFO Head Pointer
-#define ADC_SSFSTAT3_TPTR_M     0x0000000F  // FIFO Tail Pointer
+#define ADC_SSFSTAT3_FULL       0x00001000U  // FIFO Full
+#define ADC_SSFSTAT3_EMPTY      0x00000100U  // FIFO Empty
+#define ADC_SSFSTAT3_HPTR_M     0x000000F0U  // FIFO Head Pointer
+#define ADC_SSFSTAT3_TPTR_M     0x0000000FU  // FIFO Tail Pointer
 #define ADC_SSFSTAT3_HPTR_S     4
 #define ADC_SSFSTAT3_TPTR_S     0
 
@@ -587,7 +603,9 @@
 // The following are defines for the bit fields in the ADC_O_SSOP3 register.
 //
 //*****************************************************************************
-#define ADC_SSOP3_S0DCOP        0x00000001  // Sample 0 Digital Comparator
+#define ADC_SSOP3_S0DCOP        0x00000001U  // Sample 0 Digital Comparator
+                                            // Operation
+#define ADC_SSOP3_NULL          0x00000000  // Sample 0 Digital Comparator
                                             // Operation
 
 //*****************************************************************************
@@ -597,6 +615,8 @@
 //*****************************************************************************
 #define ADC_SSDC3_S0DCSEL_M     0x0000000F  // Sample 0 Digital Comparator
                                             // Select
+#define ADC_SSDC3_NULL_M     	0x00000000  // Sample 0 Digital Comparator
+                                            // Select	
 
 //*****************************************************************************
 //
