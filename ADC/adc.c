@@ -58,7 +58,7 @@ void adcInit(ADC_Module_t *ADC_Module, ADC_MODn_t ADC_MODn){
 		ADC0 -> SSOP3 |=	ADC_Module -> adcSampleSequenceOperation3; 					/* ADC Sample Sequence 3 Operation */
 		ADC0 -> SSDC3 |= ADC_Module -> adcSampleSequence3DigitalComparatorSelReg; 	/* ADC Sample Sequence 3 Digital Comparator Select*/		
 	}
-	else{							/* ADC Module 0 */
+	else{							/* ADC Module 1 */
 		ADC1 -> ACTSS |=  ADC_Module -> adcActiveSampleSequencerReg; 				/* ADC Active Sample Sequencer */
 		ADC1 -> IM |=  ADC_Module -> adcInterruptMaskReg; 	 	 					/* ADC Interrupt Mask */
 		ADC1 -> EMUX |=  ADC_Module -> adcEventMultiplexerSelReg; 	 				/* ADC Event Multiplexer Select */
