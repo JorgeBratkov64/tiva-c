@@ -286,3 +286,4 @@ ADC_Module_t ADC_Module_0 = {
 	/* (ADC_SSDC3_S0DCSEL_M <<  ADC_SSDC3_S0DCSEL_S)	*/
 	
 };
+
