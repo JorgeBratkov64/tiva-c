@@ -29,4 +29,41 @@ SOFTWARE.
 #ifndef __GPIO_H
 #define __GPIO_H
 
+#include <stdint.h>
+#include "TM4C123.h"                    // Device header
+
+
+typedef struct GPIO_Port{
+	uint32_t gpioDirReg;
+	uint32_t gpioIntSenseReg;
+	uint32_t gpioIntBothEdgeReg;
+	uint32_t gpioInteEvntReg;
+	uint32_t gpioIntMaskReg;
+	uint32_t gpioAltenateFuncReg;
+	uint32_t gpio2maDriverReg;
+	uint32_t gpio4maDriverReg;
+	uint32_t gpio8maDriverReg;
+	uint32_t gpioOpenDrainReg;
+	uint32_t gpioPullUpReg;
+	uint32_t gpioPullDownReg;
+	uint32_t gpioSlewRate;
+	uint32_t gpioDigitalEnableReg;
+	uint32_t gpioLockReg;
+	uint32_t gpioAnalogModeReg;
+	uint32_t gpioPortCtrlReg;
+	uint32_t gpioADCCtrlReg;
+	uint32_t gpioDMACtrlReg;	
+} GPIO_Port_t;
+
+typedef enum{
+	PORT_A = 0,
+	PORT_B,
+	PORT_C,
+	PORT_D,
+	PORT_E,
+	PORT_F
+} GPIO_PORTn_t;
+
+void gpioInit(GPIO_Port_t *GPIO_Port, GPIO_PORTn_t);
+
 #endif
