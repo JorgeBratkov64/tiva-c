@@ -4,7 +4,7 @@ TM4C123G gpio.c
 
 MIT License
 
-Copyright (c) 2018 JorgeBratkov64
+Copyright (c) 2019 JorgeBratkov64
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -26,136 +26,184 @@ SOFTWARE.
 
 */
 
+#include "stdint.h"
+#include "TM4C123.h"                    // Device header
 #include "gpio.h"
-#include "TM4C123.h"  
 
-/* 
-*	GPIO_EnableClockSource()
-*
-*/
+#ifdef PORTA_ENABLE
 
-void GPIO_Enable_Clock_Source(GPIO_Enable_Port_t GPIO_Enable_Port){
-	SYSCTL -> RCGCGPIO |=  GPIO_Enable_Port;	
+void gpioInitPortA( void ){
+	volatile uint32_t delay = 0;
+	SYSCTL -> RCGC2 = SYSCTL_RCGC2_GPIOA;
+	delay = SYSCTL_RCGC2_GPIOA;
+	GPIOA -> DATA = GPIO_PORTA_DATA_M;
+	GPIOA -> DIR = GPIO_PORTA_DIR_M;
+	GPIOA -> IS = GPIO_PORT_IS_RST;
+	GPIOA -> IBE = GPIO_PORT_IBE_RST; 
+	GPIOA -> IEV = GPIO_PORT_IEV_RST;
+	GPIOA -> IM = GPIO_PORT_IM_RST; 
+	GPIOA -> AFSEL = GPIO_PORT_AFSEL_RST; 
+	GPIOA -> DR2R = GPIO_PORT_DR2R_RST;
+	GPIOA -> DR4R = GPIO_PORT_DR4R_RST;  
+	GPIOA -> DR8R = GPIO_PORT_DR8R_RST; 
+	GPIOA -> ODR = GPIO_PORT_ODR_RST; 
+/*  GPIOA -> PUR =  GPIO_PORT_PUR_RST */
+	GPIOA -> PDR = GPIO_PORT_PDR_RST; 
+	GPIOA -> SLR = GPIO_PORT_SLR_RST; 
+	GPIOA -> DEN = GPIO_PORTA_DEN_R; 
+	GPIOA -> LOCK = GPIO_LOCK_LOCKED;
+	GPIOA -> AMSEL = GPIO_PORT_AMSEL_RST; 
+	GPIOA -> PCTL = GPIO_PCTL_PORTA_RST; 
+	GPIOA -> ADCCTL = GPIO_PORT_ADCCTL_RST; 
+	GPIOA -> DMACTL = GPIO_PORT_DMACTL_RST;
 }
 
-/* 
-*	GPIO_DisableClockSource()
-*
-*/
+#endif
 
-void GPIO_Disable_Clock_Source(GPIO_Disable_Port_t GPIO_Disable_Port){
-	SYSCTL -> RCGCGPIO &= GPIO_Disable_Port;	
+#ifdef PORTB_ENABLE
+
+void gpioInitPortB( void ){
+	volatile uint32_t delay = 0;
+	SYSCTL -> RCGC2 = SYSCTL_RCGC2_GPIOB;
+	delay = SYSCTL_RCGC2_GPIOB;
+	GPIOB -> DATA = GPIO_PORTB_DATA_M;
+	GPIOB -> DIR = GPIO_PORTB_DIR_M;
+	GPIOB -> IS = GPIO_PORT_IS_RST; 
+	GPIOB -> IBE = GPIO_PORT_IBE_RST;
+	GPIOB -> IEV = GPIO_PORT_IEV_RST; 
+	GPIOB -> IM = GPIO_PORT_IM_RST; 
+	GPIOB -> AFSEL = GPIO_PORT_AFSEL_RST;
+	GPIOB -> DR2R = GPIO_PORT_DR2R_RST; 
+	GPIOB -> DR4R = GPIO_PORT_DR4R_RST;  
+	GPIOB -> DR8R = GPIO_PORT_DR8R_RST; 
+	GPIOB -> ODR = GPIO_PORT_ODR_RST; 
+/*  GPIOB -> PUR =  GPIO_PORT_PUR_RST */
+	GPIOB -> PDR = GPIO_PORT_PDR_RST; 
+	GPIOB -> SLR = GPIO_PORT_SLR_RST; 
+	GPIOB -> DEN = GPIO_PORTB_DEN_R; 
+	GPIOB -> LOCK = GPIO_LOCK_LOCKED; 
+	GPIOB -> AMSEL = GPIO_PORT_AMSEL_RST; 
+	GPIOB -> PCTL = GPIO_PCTL_PORTB_RST; 
+	GPIOB -> ADCCTL = GPIO_PORT_ADCCTL_RST; 
+	GPIOB -> DMACTL = GPIO_PORT_DMACTL_RST; 
 }
 
-/* 
-*	GPIO_Set_Alternate_Function(GPIO_PORTn_t, GPIO_PINn_t)
-*
-*/
+#endif
 
-void GPIO_Set_Alternate_Function(GPIO_PORTn_t GPIO_PORTn, GPIO_PINn_t GPIO_PINn){
-	switch(GPIO_PORTn){			
-		case PORTA:			/* GPIO PORTA */
-			GPIOA -> AFSEL |= GPIO_PINn;		/* Alternate function on PAn*/
-		break;
-		case PORTB:			/* GPIO PORTB */
-			GPIOB -> AFSEL |= GPIO_PINn;		/* Alternate function on PBn*/
-		break;
-		case PORTC:			/* GPIO PORTC */
-			GPIOC -> AFSEL |= GPIO_PINn;		/* Alternate function on PCn*/
-		break;
-		case PORTD:			/* GPIO PORTD */
-			GPIOD -> AFSEL |= GPIO_PINn;		/* Alternate function on PDn*/
-		break;
-		case PORTE:			/* GPIO PORTE */
-			GPIOE -> AFSEL |= GPIO_PINn;		/* Alternate function on PEn*/
-		break;
-		default:			/* GPIO PORTF */
-			GPIOF -> AFSEL |= GPIO_PINn;		/* Alternate function on PFn*/
-		break;
-	}
+#ifdef PORTC_ENABLE
+
+void gpioInitPortC( void ){		
+	volatile uint32_t delay = 0;
+	SYSCTL -> RCGC2 = SYSCTL_RCGC2_GPIOC;
+	delay = SYSCTL_RCGC2_GPIOC;
+	GPIOC -> DATA = GPIO_PORTC_DATA_M;
+	GPIOC -> DIR = GPIO_PORTC_DIR_M;
+	GPIOC -> IS = GPIO_PORT_IS_RST; 
+	GPIOC -> IBE =  GPIO_PORT_IBE_RST;
+	GPIOC -> IEV = GPIO_PORT_IEV_RST; 
+	GPIOC -> IM = GPIO_PORT_IM_RST; 
+	GPIOC -> AFSEL = GPIO_PORT_AFSEL_RST;
+	GPIOC -> DR2R = GPIO_PORT_DR2R_RST; 
+	GPIOC -> DR4R = GPIO_PORT_DR4R_RST;  
+	GPIOC -> DR8R = GPIO_PORT_DR8R_RST; 
+	GPIOC -> ODR = GPIO_PORT_ODR_RST; 
+/*  GPIOC -> PUR =  GPIO_PORT_PUR_RST */
+	GPIOC -> PDR = GPIO_PORT_PDR_RST; 
+	GPIOC -> SLR = GPIO_PORT_SLR_RST; 
+	GPIOC -> DEN = GPIO_PORTC_DEN_R; 
+	GPIOC -> LOCK = GPIO_LOCK_LOCKED; 
+	GPIOC -> AMSEL = GPIO_PORT_AMSEL_RST; 
+	GPIOC -> PCTL = GPIO_PCTL_PORTC_RST; 
+	GPIOC -> ADCCTL = GPIO_PORT_ADCCTL_RST; 
+	GPIOC -> DMACTL = GPIO_PORT_DMACTL_RST; 
+}
+#endif
+
+#ifdef PORTD_ENABLE
+
+void gpioInitPortD( void ){
+	volatile uint32_t delay = 0;
+	SYSCTL -> RCGC2 = SYSCTL_RCGC2_GPIOD;
+	delay = SYSCTL_RCGC2_GPIOD;
+	GPIOD -> DATA = GPIO_PORTD_DATA_M;
+	GPIOD -> DIR = GPIO_PORTD_DIR_M;
+	GPIOD -> IS = GPIO_PORT_IS_RST; 
+	GPIOD -> IBE = GPIO_PORT_IBE_RST; 
+	GPIOD -> IEV = GPIO_PORT_IEV_RST; 
+	GPIOD -> IM = GPIO_PORT_IM_RST; 
+	GPIOD -> AFSEL = GPIO_PORT_AFSEL_RST; 
+	GPIOD -> DR2R = GPIO_PORT_DR2R_RST; 
+	GPIOD -> DR4R = GPIO_PORT_DR4R_RST;  
+	GPIOD -> DR8R = GPIO_PORT_DR8R_RST; 
+	GPIOD -> ODR = GPIO_PORT_ODR_RST; 
+/*  GPIOD -> PUR =  GPIO_PORT_PUR_RST */
+	GPIOD -> PDR = GPIO_PORT_PDR_RST; 
+	GPIOD -> SLR = GPIO_PORT_SLR_RST; 
+	GPIOD -> DEN = GPIO_PORTD_DEN_R; 
+	GPIOD -> LOCK = GPIO_LOCK_LOCKED; 
+	GPIOD -> AMSEL = GPIO_PORT_AMSEL_RST; 
+	GPIOD -> PCTL = GPIO_PCTL_PORTD_RST; 
+	GPIOD -> ADCCTL = GPIO_PORT_ADCCTL_RST; 
+	GPIOD -> DMACTL = GPIO_PORT_DMACTL_RST; 
 }
 
-/* 
-*	GPIO_Enable_Digital_Function(GPIO_PORTn_t, GPIO_PINn_t)
-*
-*/
+#endif
 
-void GPIO_Enable_Digital_Function(GPIO_PORTn_t GPIO_PORTn, GPIO_PINn_t GPIO_PINn){
-	switch(GPIO_PORTn){
-		case PORTA:			/* GPIO PORTA */
-			GPIOA -> DEN |= GPIO_PINn;		/* Digital function on PAn*/
-		break;
-		case PORTB:			/* GPIO PORTB */
-			GPIOB -> DEN |= GPIO_PINn;		/* Digital function on PBn*/
-		break;
-		case PORTC:			/* GPIO PORTC */
-			GPIOC -> DEN |= GPIO_PINn;		/* Digital function on PCn*/
-		break;
-		case PORTD:			/* GPIO PORTD */
-			GPIOD -> DEN |= GPIO_PINn;		/* Digital function on PDn*/
-		break;
-		case PORTE:			/* GPIO PORTE */
-			GPIOE -> DEN |= GPIO_PINn;		/* Digital function on PEn*/
-		break;
-		default:			/* GPIO PORTF */
-			GPIOF -> DEN |= GPIO_PINn;		/* Digital function on PFn*/
-		break;
-	}
+#ifdef PORTE_ENABLE
+void gpioInitPortE( void ){
+	volatile uint32_t delay = 0;
+	SYSCTL -> RCGC2 = SYSCTL_RCGC2_GPIOE;
+	delay = SYSCTL_RCGC2_GPIOE;
+	GPIOE -> DATA = GPIO_PORTE_DATA_M;
+	GPIOE -> DIR = GPIO_PORTE_DIR_M;
+	GPIOE -> IS = GPIO_PORT_IS_RST; 
+	GPIOE -> IBE = GPIO_PORT_IBE_RST; 
+	GPIOE -> IEV = GPIO_PORT_IEV_RST; 
+	GPIOE -> IM = GPIO_PORT_IM_RST; 
+	GPIOE -> AFSEL = GPIO_PORT_AFSEL_RST; 
+	GPIOE -> DR2R = GPIO_PORT_DR2R_RST; 
+	GPIOE -> DR4R = GPIO_PORT_DR4R_RST;  
+	GPIOE -> DR8R = GPIO_PORT_DR8R_RST; 
+	GPIOE -> ODR = GPIO_PORT_ODR_RST; 
+/*  GPIOE -> PUR =  GPIO_PORT_PUR_RST */
+	GPIOE -> PDR = GPIO_PORT_PDR_RST;
+	GPIOE -> SLR = GPIO_PORT_SLR_RST; 
+	GPIOE -> DEN = GPIO_PORTE_DEN_R; 
+	GPIOE -> LOCK = GPIO_LOCK_LOCKED; 
+	GPIOE -> AMSEL = GPIO_PORT_AMSEL_RST; 
+	GPIOE -> PCTL = GPIO_PCTL_PORTE_RST; 
+	GPIOE -> ADCCTL = GPIO_PORT_ADCCTL_RST; 
+	GPIOE -> DMACTL = GPIO_PORT_DMACTL_RST; 
 }
 
-/* 
-*	GPIO_Disable_Digital_Function(GPIO_PORTn_t, GPIO_PINn_t)
-*
-*/
+#endif
 
-void GPIO_Disable_Digital_Function(GPIO_PORTn_t GPIO_PORTn, GPIO_PINn_t GPIO_PINn){
-	switch(GPIO_PORTn){
-		case PORTA:			/* GPIO PORTA */
-			GPIOA -> DEN &= ~(GPIO_PINn);		/* Digital function on PAn*/
-		break;
-		case PORTB:			/* GPIO PORTB */
-			GPIOB -> DEN &= ~(GPIO_PINn);		/* Digital function on PBn*/
-		break;
-		case PORTC:			/* GPIO PORTC */
-			GPIOC -> DEN &= ~(GPIO_PINn);		/* Digital function on PCn*/
-		break;
-		case PORTD:			/* GPIO PORTD */
-			GPIOD -> DEN &= ~(GPIO_PINn);		/* Digital function on PDn*/
-		break;
-		case PORTE:			/* GPIO PORTE */
-			GPIOE -> DEN &= ~(GPIO_PINn);		/* Digital function on PEn*/
-		break;
-		default:			/* GPIO PORTF */
-			GPIOF -> DEN &= ~(GPIO_PINn);		/* Digital function on PFn*/
-		break;
-	}
+#ifdef PORTF_ENABLE
+
+void gpioInitPortF( void ){
+	volatile uint32_t delay = 0;
+	SYSCTL -> RCGC2 = SYSCTL_RCGC2_GPIOF;
+	delay = SYSCTL_RCGC2_GPIOF;
+	GPIOF -> DATA = GPIO_PORTF_DATA_M;
+	GPIOF -> DIR = GPIO_PORTF_DIR_M;
+	GPIOF -> IS = GPIO_PORT_IS_RST; 
+	GPIOF -> IBE = GPIO_PORT_IBE_RST;
+	GPIOF -> IEV = GPIO_PORT_IEV_RST; 
+	GPIOF -> IM = GPIO_PORT_IM_RST; 
+	GPIOF -> AFSEL = GPIO_PORT_AFSEL_RST;
+	GPIOF -> DR2R = GPIO_PORT_DR2R_RST; 
+	GPIOF -> DR4R = GPIO_PORT_DR4R_RST; 
+	GPIOF -> DR8R = GPIO_PORT_DR8R_RST; 
+	GPIOF -> ODR = GPIO_PORT_ODR_RST;  
+/*  GPIOF -> PUR = GPIO_PORT_PUR_RST */
+	GPIOF -> PDR = GPIO_PORT_PDR_RST; 
+	GPIOF -> SLR = GPIO_PORT_SLR_RST;  
+	GPIOF -> DEN = GPIO_PORTF_DEN_R; 
+	GPIOF -> LOCK = GPIO_LOCK_LOCKED; 
+	GPIOF -> AMSEL = GPIO_PORT_AMSEL_RST; 
+	GPIOF -> PCTL = GPIO_PCTL_PORTF_RST; 
+	GPIOF -> ADCCTL = GPIO_PORT_ADCCTL_RST; 
+	GPIOF -> DMACTL = GPIO_PORT_DMACTL_RST; 
 }
 
-/* 
-*	GPIO_Disable_Analog_Isolation(GPIO_PORTn_t, GPIO_PINn_t)
-*
-*/
-
-void GPIO_Disable_Analog_Isolation(GPIO_PORTn_t GPIO_PORTn, GPIO_PINn_t GPIO_PINn){
-	switch(GPIO_PORTn){
-		case PORTB:			/* ADC inputs */
-			GPIOB -> AMSEL |= GPIO_PINn;
-		break;
-		case PORTC:			/* Analog comparators */
-			GPIOC -> AMSEL |= GPIO_PINn;
-		break;
-		case PORTD:			/* ADC inputs */
-			GPIOD -> AMSEL |= GPIO_PINn;
-		break;
-		case PORTE:			/* ADC inputs */
-			GPIOE -> AMSEL |= GPIO_PINn;
-		break;
-		default:
-		break;
-	}
-}
-
-
-
-
-
+#endif
