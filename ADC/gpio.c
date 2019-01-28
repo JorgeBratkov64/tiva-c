@@ -30,149 +30,180 @@ SOFTWARE.
 #include "TM4C123.h"                    // Device header
 #include "gpio.h"
 
-void gpioInit(GPIO_Port_t *GPIO_Port, GPIO_PORTn_t GPIO_PORTn){
+#ifdef PORTA_ENABLE
+
+void gpioInitPortA( void ){
 	volatile uint32_t delay = 0;
-	switch(GPIO_PORTn){
-		case PORT_A:			/* GPIO Port A	*/
-			SYSCTL -> RCGC2 = GPIO_Port -> sysRcgc2Reg;
-			delay = GPIO_Port -> sysRcgc2Reg;
-			GPIOA -> DIR = GPIO_Port -> gpioDirReg;
-			GPIOA -> IS = GPIO_Port -> gpioIntSenseReg;
-			GPIOA -> IBE = GPIO_Port -> gpioIntBothEdgeReg;
-			GPIOA -> IEV = GPIO_Port -> gpioInteEvntReg;
-			GPIOA -> IM = GPIO_Port -> gpioIntMaskReg;
-			GPIOA -> AFSEL = GPIO_Port -> gpioAltenateFuncReg;
-			GPIOA -> DR2R = GPIO_Port -> gpio2maDriverReg;
-			GPIOA -> DR4R = GPIO_Port -> gpio4maDriverReg;
-			GPIOA -> DR8R = GPIO_Port -> gpio8maDriverReg;
-			GPIOA -> ODR = GPIO_Port -> gpioOpenDrainReg;
-			GPIOA -> PUR = GPIO_Port -> gpioPullUpReg;
-			GPIOA -> PDR = GPIO_Port -> gpioPullDownReg;
-			GPIOA -> SLR = GPIO_Port -> gpioSlewRate;
-			GPIOA -> DEN = GPIO_Port -> gpioDigitalEnableReg;
-			GPIOA -> LOCK = GPIO_Port -> gpioLockReg;
-			GPIOA -> AMSEL = GPIO_Port -> gpioAnalogModeReg;
-			GPIOA -> PCTL = GPIO_Port ->  gpioPortCtrlReg;
-			GPIOA -> ADCCTL = GPIO_Port -> gpioADCCtrlReg;
-			GPIOA -> DMACTL = GPIO_Port -> gpioDMACtrlReg;
-		break;
-		case PORT_B:			/* GPIO Port B	*/
-			SYSCTL -> RCGC2 = GPIO_Port -> sysRcgc2Reg;
-			delay = GPIO_Port -> sysRcgc2Reg;
-			GPIOB -> DIR = GPIO_Port -> gpioDirReg;
-			GPIOB -> IS = GPIO_Port -> gpioIntSenseReg;
-			GPIOB -> IBE = GPIO_Port -> gpioIntBothEdgeReg;
-			GPIOB -> IEV = GPIO_Port -> gpioInteEvntReg;
-			GPIOB -> IM = GPIO_Port -> gpioIntMaskReg;
-			GPIOB -> AFSEL = GPIO_Port -> gpioAltenateFuncReg;
-			GPIOB -> DR2R = GPIO_Port -> gpio2maDriverReg;
-			GPIOB -> DR4R = GPIO_Port -> gpio4maDriverReg;
-			GPIOB -> DR8R = GPIO_Port -> gpio8maDriverReg;
-			GPIOB -> ODR = GPIO_Port -> gpioOpenDrainReg;
-			GPIOB -> PUR = GPIO_Port -> gpioPullUpReg;
-			GPIOB -> PDR = GPIO_Port -> gpioPullDownReg;
-			GPIOB -> SLR = GPIO_Port -> gpioSlewRate;
-			GPIOB -> DEN = GPIO_Port -> gpioDigitalEnableReg;
-			GPIOB -> LOCK = GPIO_Port -> gpioLockReg;
-			GPIOB -> AMSEL = GPIO_Port -> gpioAnalogModeReg;
-			GPIOB -> PCTL = GPIO_Port ->  gpioPortCtrlReg;
-			GPIOB -> ADCCTL = GPIO_Port -> gpioADCCtrlReg;
-			GPIOB -> DMACTL = GPIO_Port -> gpioDMACtrlReg;
-		break;
-		case PORT_C:			/* GPIO Port C	*/
-			SYSCTL -> RCGC2 = GPIO_Port -> sysRcgc2Reg;
-			delay = GPIO_Port -> sysRcgc2Reg;
-			GPIOC -> DIR = GPIO_Port -> gpioDirReg;
-			GPIOC -> IS = GPIO_Port -> gpioIntSenseReg;
-			GPIOC -> IBE = GPIO_Port -> gpioIntBothEdgeReg;
-			GPIOC -> IEV = GPIO_Port -> gpioInteEvntReg;
-			GPIOC -> IM = GPIO_Port -> gpioIntMaskReg;
-			GPIOC -> AFSEL = GPIO_Port -> gpioAltenateFuncReg;
-			GPIOC -> DR2R = GPIO_Port -> gpio2maDriverReg;
-			GPIOC -> DR4R = GPIO_Port -> gpio4maDriverReg;
-			GPIOC -> DR8R = GPIO_Port -> gpio8maDriverReg;
-			GPIOC -> ODR = GPIO_Port -> gpioOpenDrainReg;
-			GPIOC -> PUR = GPIO_Port -> gpioPullUpReg;
-			GPIOC -> PDR = GPIO_Port -> gpioPullDownReg;
-			GPIOC -> SLR = GPIO_Port -> gpioSlewRate;
-			GPIOC -> DEN = GPIO_Port -> gpioDigitalEnableReg;
-			GPIOC -> LOCK = GPIO_Port -> gpioLockReg;
-			GPIOC -> AMSEL = GPIO_Port -> gpioAnalogModeReg;
-			GPIOC -> PCTL = GPIO_Port ->  gpioPortCtrlReg;
-			GPIOC -> ADCCTL = GPIO_Port -> gpioADCCtrlReg;
-			GPIOC -> DMACTL = GPIO_Port -> gpioDMACtrlReg;
-		break;
-		case PORT_D:			/* GPIO Port D	*/
-			SYSCTL -> RCGC2 = GPIO_Port -> sysRcgc2Reg;
-			delay = GPIO_Port -> sysRcgc2Reg;
-			GPIOD -> DIR = GPIO_Port -> gpioDirReg;
-			GPIOD -> IS = GPIO_Port -> gpioIntSenseReg;
-			GPIOD -> IBE = GPIO_Port -> gpioIntBothEdgeReg;
-			GPIOD -> IEV = GPIO_Port -> gpioInteEvntReg;
-			GPIOD -> IM = GPIO_Port -> gpioIntMaskReg;
-			GPIOD -> AFSEL = GPIO_Port -> gpioAltenateFuncReg;
-			GPIOD -> DR2R = GPIO_Port -> gpio2maDriverReg;
-			GPIOD -> DR4R = GPIO_Port -> gpio4maDriverReg;
-			GPIOD -> DR8R = GPIO_Port -> gpio8maDriverReg;
-			GPIOD -> ODR = GPIO_Port -> gpioOpenDrainReg;
-			GPIOD -> PUR = GPIO_Port -> gpioPullUpReg;
-			GPIOD -> PDR = GPIO_Port -> gpioPullDownReg;
-			GPIOD -> SLR = GPIO_Port -> gpioSlewRate;
-			GPIOD -> DEN = GPIO_Port -> gpioDigitalEnableReg;
-			GPIOD -> LOCK = GPIO_Port -> gpioLockReg;
-			GPIOD -> AMSEL = GPIO_Port -> gpioAnalogModeReg;
-			GPIOD -> PCTL = GPIO_Port ->  gpioPortCtrlReg;
-			GPIOD -> ADCCTL = GPIO_Port -> gpioADCCtrlReg;
-			GPIOD -> DMACTL = GPIO_Port -> gpioDMACtrlReg;
-		break;
-		case PORT_E:			/* GPIO Port E	*/
-			SYSCTL -> RCGC2 = GPIO_Port -> sysRcgc2Reg;
-			delay = GPIO_Port -> sysRcgc2Reg;
-			GPIOE -> DIR = GPIO_Port -> gpioDirReg;
-			GPIOE -> IS = GPIO_Port -> gpioIntSenseReg;
-			GPIOE -> IBE = GPIO_Port -> gpioIntBothEdgeReg;
-			GPIOE -> IEV = GPIO_Port -> gpioInteEvntReg;
-			GPIOE -> IM = GPIO_Port -> gpioIntMaskReg;
-			GPIOE -> AFSEL = GPIO_Port -> gpioAltenateFuncReg;
-			GPIOE -> DR2R = GPIO_Port -> gpio2maDriverReg;
-			GPIOE -> DR4R = GPIO_Port -> gpio4maDriverReg;
-			GPIOE -> DR8R = GPIO_Port -> gpio8maDriverReg;
-			GPIOE -> ODR = GPIO_Port -> gpioOpenDrainReg;
-			GPIOE -> PUR = GPIO_Port -> gpioPullUpReg;
-			GPIOE -> PDR = GPIO_Port -> gpioPullDownReg;
-			GPIOE -> SLR = GPIO_Port -> gpioSlewRate;
-			GPIOE -> DEN = GPIO_Port -> gpioDigitalEnableReg;
-			GPIOE -> LOCK = GPIO_Port -> gpioLockReg;
-			GPIOE -> AMSEL = GPIO_Port -> gpioAnalogModeReg;
-			GPIOE -> PCTL = GPIO_Port ->  gpioPortCtrlReg;
-			GPIOE -> ADCCTL = GPIO_Port -> gpioADCCtrlReg;
-			GPIOE -> DMACTL = GPIO_Port -> gpioDMACtrlReg;
-		break;
-		case PORT_F:			/* GPIO Port F	*/
-			SYSCTL -> RCGC2 = GPIO_Port -> sysRcgc2Reg;
-			delay = GPIO_Port -> sysRcgc2Reg;
-			GPIOF -> DIR = GPIO_Port -> gpioDirReg;
-			GPIOF -> IS = GPIO_Port -> gpioIntSenseReg;
-			GPIOF -> IBE = GPIO_Port -> gpioIntBothEdgeReg;
-			GPIOF -> IEV = GPIO_Port -> gpioInteEvntReg;
-			GPIOF -> IM = GPIO_Port -> gpioIntMaskReg;
-			GPIOF -> AFSEL = GPIO_Port -> gpioAltenateFuncReg;
-			GPIOF -> DR2R = GPIO_Port -> gpio2maDriverReg;
-			GPIOF -> DR4R = GPIO_Port -> gpio4maDriverReg;
-			GPIOF -> DR8R = GPIO_Port -> gpio8maDriverReg;
-			GPIOF -> ODR = GPIO_Port -> gpioOpenDrainReg;
-			GPIOF -> PUR = GPIO_Port -> gpioPullUpReg;
-			GPIOF -> PDR = GPIO_Port -> gpioPullDownReg;
-			GPIOF -> SLR = GPIO_Port -> gpioSlewRate;
-			GPIOF -> DEN = GPIO_Port -> gpioDigitalEnableReg;
-			GPIOF -> LOCK = GPIO_Port -> gpioLockReg;
-			GPIOF -> AMSEL = GPIO_Port -> gpioAnalogModeReg;
-			GPIOF -> PCTL = GPIO_Port ->  gpioPortCtrlReg;
-			GPIOF -> ADCCTL = GPIO_Port -> gpioADCCtrlReg;
-			GPIOF -> DMACTL = GPIO_Port -> gpioDMACtrlReg;
-		break;
-		default:
-		break;		
-	}
+	SYSCTL -> RCGC2 = SYSCTL_RCGC2_GPIOA;
+	delay = SYSCTL_RCGC2_GPIOA;
+	GPIOA -> DATA = GPIO_PORTA_DATA_M;
+	GPIOA -> DIR = GPIO_PORTA_DIR_M;
+	GPIOA -> IS = GPIO_PORT_IS_RST;
+	GPIOA -> IBE = GPIO_PORT_IBE_RST; 
+	GPIOA -> IEV = GPIO_PORT_IEV_RST;
+	GPIOA -> IM = GPIO_PORT_IM_RST; 
+	GPIOA -> AFSEL = GPIO_PORT_AFSEL_RST; 
+	GPIOA -> DR2R = GPIO_PORT_DR2R_RST;
+	GPIOA -> DR4R = GPIO_PORT_DR4R_RST;  
+	GPIOA -> DR8R = GPIO_PORT_DR8R_RST; 
+	GPIOA -> ODR = GPIO_PORT_ODR_RST; 
+/*  GPIOA -> PUR =  GPIO_PORT_PUR_RST */
+	GPIOA -> PDR = GPIO_PORT_PDR_RST; 
+	GPIOA -> SLR = GPIO_PORT_SLR_RST; 
+	GPIOA -> DEN = GPIO_PORTA_DEN_R; 
+	GPIOA -> LOCK = GPIO_LOCK_LOCKED;
+	GPIOA -> AMSEL = GPIO_PORT_AMSEL_RST; 
+	GPIOA -> PCTL = GPIO_PCTL_PORTA_RST; 
+	GPIOA -> ADCCTL = GPIO_PORT_ADCCTL_RST; 
+	GPIOA -> DMACTL = GPIO_PORT_DMACTL_RST;
 }
 
+#endif
+
+#ifdef PORTB_ENABLE
+
+void gpioInitPortB( void ){
+	volatile uint32_t delay = 0;
+	SYSCTL -> RCGC2 = SYSCTL_RCGC2_GPIOB;
+	delay = SYSCTL_RCGC2_GPIOB;
+	GPIOB -> DATA = GPIO_PORTB_DATA_M;
+	GPIOB -> DIR = GPIO_PORTB_DIR_M;
+	GPIOB -> IS = GPIO_PORT_IS_RST; 
+	GPIOB -> IBE = GPIO_PORT_IBE_RST;
+	GPIOB -> IEV = GPIO_PORT_IEV_RST; 
+	GPIOB -> IM = GPIO_PORT_IM_RST; 
+	GPIOB -> AFSEL = GPIO_PORT_AFSEL_RST;
+	GPIOB -> DR2R = GPIO_PORT_DR2R_RST; 
+	GPIOB -> DR4R = GPIO_PORT_DR4R_RST;  
+	GPIOB -> DR8R = GPIO_PORT_DR8R_RST; 
+	GPIOB -> ODR = GPIO_PORT_ODR_RST; 
+/*  GPIOB -> PUR =  GPIO_PORT_PUR_RST */
+	GPIOB -> PDR = GPIO_PORT_PDR_RST; 
+	GPIOB -> SLR = GPIO_PORT_SLR_RST; 
+	GPIOB -> DEN = GPIO_PORTB_DEN_R; 
+	GPIOB -> LOCK = GPIO_LOCK_LOCKED; 
+	GPIOB -> AMSEL = GPIO_PORT_AMSEL_RST; 
+	GPIOB -> PCTL = GPIO_PCTL_PORTB_RST; 
+	GPIOB -> ADCCTL = GPIO_PORT_ADCCTL_RST; 
+	GPIOB -> DMACTL = GPIO_PORT_DMACTL_RST; 
+}
+
+#endif
+
+#ifdef PORTC_ENABLE
+
+void gpioInitPortC( void ){		
+	volatile uint32_t delay = 0;
+	SYSCTL -> RCGC2 = SYSCTL_RCGC2_GPIOC;
+	delay = SYSCTL_RCGC2_GPIOC;
+	GPIOC -> DATA = GPIO_PORTC_DATA_M;
+	GPIOC -> DIR = GPIO_PORTC_DIR_M;
+	GPIOC -> IS = GPIO_PORT_IS_RST; 
+	GPIOC -> IBE =  GPIO_PORT_IBE_RST;
+	GPIOC -> IEV = GPIO_PORT_IEV_RST; 
+	GPIOC -> IM = GPIO_PORT_IM_RST; 
+	GPIOC -> AFSEL = GPIO_PORT_AFSEL_RST;
+	GPIOC -> DR2R = GPIO_PORT_DR2R_RST; 
+	GPIOC -> DR4R = GPIO_PORT_DR4R_RST;  
+	GPIOC -> DR8R = GPIO_PORT_DR8R_RST; 
+	GPIOC -> ODR = GPIO_PORT_ODR_RST; 
+/*  GPIOC -> PUR =  GPIO_PORT_PUR_RST */
+	GPIOC -> PDR = GPIO_PORT_PDR_RST; 
+	GPIOC -> SLR = GPIO_PORT_SLR_RST; 
+	GPIOC -> DEN = GPIO_PORTC_DEN_R; 
+	GPIOC -> LOCK = GPIO_LOCK_LOCKED; 
+	GPIOC -> AMSEL = GPIO_PORT_AMSEL_RST; 
+	GPIOC -> PCTL = GPIO_PCTL_PORTC_RST; 
+	GPIOC -> ADCCTL = GPIO_PORT_ADCCTL_RST; 
+	GPIOC -> DMACTL = GPIO_PORT_DMACTL_RST; 
+}
+#endif
+
+#ifdef PORTD_ENABLE
+
+void gpioInitPortD( void ){
+	volatile uint32_t delay = 0;
+	SYSCTL -> RCGC2 = SYSCTL_RCGC2_GPIOD;
+	delay = SYSCTL_RCGC2_GPIOD;
+	GPIOD -> DATA = GPIO_PORTD_DATA_M;
+	GPIOD -> DIR = GPIO_PORTD_DIR_M;
+	GPIOD -> IS = GPIO_PORT_IS_RST; 
+	GPIOD -> IBE = GPIO_PORT_IBE_RST; 
+	GPIOD -> IEV = GPIO_PORT_IEV_RST; 
+	GPIOD -> IM = GPIO_PORT_IM_RST; 
+	GPIOD -> AFSEL = GPIO_PORT_AFSEL_RST; 
+	GPIOD -> DR2R = GPIO_PORT_DR2R_RST; 
+	GPIOD -> DR4R = GPIO_PORT_DR4R_RST;  
+	GPIOD -> DR8R = GPIO_PORT_DR8R_RST; 
+	GPIOD -> ODR = GPIO_PORT_ODR_RST; 
+/*  GPIOD -> PUR =  GPIO_PORT_PUR_RST */
+	GPIOD -> PDR = GPIO_PORT_PDR_RST; 
+	GPIOD -> SLR = GPIO_PORT_SLR_RST; 
+	GPIOD -> DEN = GPIO_PORTD_DEN_R; 
+	GPIOD -> LOCK = GPIO_LOCK_LOCKED; 
+	GPIOD -> AMSEL = GPIO_PORT_AMSEL_RST; 
+	GPIOD -> PCTL = GPIO_PCTL_PORTD_RST; 
+	GPIOD -> ADCCTL = GPIO_PORT_ADCCTL_RST; 
+	GPIOD -> DMACTL = GPIO_PORT_DMACTL_RST; 
+}
+
+#endif
+
+#ifdef PORTE_ENABLE
+void gpioInitPortE( void ){
+	volatile uint32_t delay = 0;
+	SYSCTL -> RCGC2 = SYSCTL_RCGC2_GPIOE;
+	delay = SYSCTL_RCGC2_GPIOE;
+	GPIOE -> DATA = GPIO_PORTE_DATA_M;
+	GPIOE -> DIR = GPIO_PORTE_DIR_M;
+	GPIOE -> IS = GPIO_PORT_IS_RST; 
+	GPIOE -> IBE = GPIO_PORT_IBE_RST; 
+	GPIOE -> IEV = GPIO_PORT_IEV_RST; 
+	GPIOE -> IM = GPIO_PORT_IM_RST; 
+	GPIOE -> AFSEL = GPIO_PORT_AFSEL_RST; 
+	GPIOE -> DR2R = GPIO_PORT_DR2R_RST; 
+	GPIOE -> DR4R = GPIO_PORT_DR4R_RST;  
+	GPIOE -> DR8R = GPIO_PORT_DR8R_RST; 
+	GPIOE -> ODR = GPIO_PORT_ODR_RST; 
+/*  GPIOE -> PUR =  GPIO_PORT_PUR_RST */
+	GPIOE -> PDR = GPIO_PORT_PDR_RST;
+	GPIOE -> SLR = GPIO_PORT_SLR_RST; 
+	GPIOE -> DEN = GPIO_PORTE_DEN_R; 
+	GPIOE -> LOCK = GPIO_LOCK_LOCKED; 
+	GPIOE -> AMSEL = GPIO_PORT_AMSEL_RST; 
+	GPIOE -> PCTL = GPIO_PCTL_PORTE_RST; 
+	GPIOE -> ADCCTL = GPIO_PORT_ADCCTL_RST; 
+	GPIOE -> DMACTL = GPIO_PORT_DMACTL_RST; 
+}
+
+#endif
+
+#ifdef PORTF_ENABLE
+
+void gpioInitPortF( void ){
+	volatile uint32_t delay = 0;
+	SYSCTL -> RCGC2 = SYSCTL_RCGC2_GPIOF;
+	delay = SYSCTL_RCGC2_GPIOF;
+	GPIOF -> DATA = GPIO_PORTF_DATA_M;
+	GPIOF -> DIR = GPIO_PORTF_DIR_M;
+	GPIOF -> IS = GPIO_PORT_IS_RST; 
+	GPIOF -> IBE = GPIO_PORT_IBE_RST;
+	GPIOF -> IEV = GPIO_PORT_IEV_RST; 
+	GPIOF -> IM = GPIO_PORT_IM_RST; 
+	GPIOF -> AFSEL = GPIO_PORT_AFSEL_RST;
+	GPIOF -> DR2R = GPIO_PORT_DR2R_RST; 
+	GPIOF -> DR4R = GPIO_PORT_DR4R_RST; 
+	GPIOF -> DR8R = GPIO_PORT_DR8R_RST; 
+	GPIOF -> ODR = GPIO_PORT_ODR_RST;  
+/*  GPIOF -> PUR = GPIO_PORT_PUR_RST */
+	GPIOF -> PDR = GPIO_PORT_PDR_RST; 
+	GPIOF -> SLR = GPIO_PORT_SLR_RST;  
+	GPIOF -> DEN = GPIO_PORTF_DEN_R; 
+	GPIOF -> LOCK = GPIO_LOCK_LOCKED; 
+	GPIOF -> AMSEL = GPIO_PORT_AMSEL_RST; 
+	GPIOF -> PCTL = GPIO_PCTL_PORTF_RST; 
+	GPIOF -> ADCCTL = GPIO_PORT_ADCCTL_RST; 
+	GPIOF -> DMACTL = GPIO_PORT_DMACTL_RST; 
+}
+
+#endif

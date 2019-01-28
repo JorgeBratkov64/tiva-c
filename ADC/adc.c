@@ -86,3 +86,4 @@ void adcInit(ADC_Module_t *ADC_Module, ADC_MODn_t ADC_MODn){
 		ADC1 -> SSDC3 |= ADC_Module -> adcSampleSequence3DigitalComparatorSelReg; 	/* ADC Sample Sequence 3 Digital Comparator Select*/	
 	}
 }
+

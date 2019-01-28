@@ -388,11 +388,6 @@
               <FilePath>.\adc.c</FilePath>
             </File>
             <File>
-              <FileName>gpio.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\gpio.c</FilePath>
-            </File>
-            <File>
               <FileName>adc.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\adc.h</FilePath>
@@ -403,11 +398,6 @@
               <FilePath>.\main.c</FilePath>
             </File>
             <File>
-              <FileName>gpio.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\gpio.h</FilePath>
-            </File>
-            <File>
               <FileName>adc_Cfg.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\adc_Cfg.c</FilePath>
@@ -416,6 +406,24 @@
               <FileName>adc_Cfg.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\adc_Cfg.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>ADC</GroupName>
+        </Group>
+        <Group>
+          <GroupName>GPIO</GroupName>
+          <Files>
+            <File>
+              <FileName>gpio.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\gpio.h</FilePath>
+            </File>
+            <File>
+              <FileName>gpio.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\gpio.c</FilePath>
             </File>
           </Files>
         </Group>
