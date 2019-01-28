@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\Nlinky_CMSIS_RTOS.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\Nlinky_CMSIS_RTOS.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Mon Jan 07 18:59:20 2019
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Thu Jan 24 10:05:00 2019
 <BR><P>
 <H3>Maximum Stack Usage =         80 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -1317,18 +1317,18 @@ Global Symbols
 
 <P><STRONG><a name="[114]"></a>__semihosting_library_function</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, indicate_semi.o(.text), UNUSED)
 
-<P><STRONG><a name="[ad]"></a>BLUE_toggle</STRONG> (Thumb, 44 bytes, Stack size 8 bytes, led.o(i.BLUE_toggle))
-<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = BLUE_toggle &rArr; delay
-</UL>
-<BR>[Calls]<UL><LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay
-</UL>
-<BR>[Called By]<UL><LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;threadBLUE
-</UL>
-
 <P><STRONG><a name="[b7]"></a>LED_Init</STRONG> (Thumb, 64 bytes, Stack size 8 bytes, led.o(i.LED_Init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = LED_Init
 </UL>
 <BR>[Called By]<UL><LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
+
+<P><STRONG><a name="[ad]"></a>MAGENTA_toggle</STRONG> (Thumb, 44 bytes, Stack size 8 bytes, led.o(i.MAGENTA_toggle))
+<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = MAGENTA_toggle &rArr; delay
+</UL>
+<BR>[Calls]<UL><LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay
+</UL>
+<BR>[Called By]<UL><LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;threadBLUE
 </UL>
 
 <P><STRONG><a name="[af]"></a>RED_toggle</STRONG> (Thumb, 44 bytes, Stack size 8 bytes, led.o(i.RED_toggle))
@@ -1930,9 +1930,9 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[88]"></a>threadBLUE</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, main.o(i.threadBLUE))
-<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = threadBLUE &rArr; BLUE_toggle &rArr; delay
+<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = threadBLUE &rArr; MAGENTA_toggle &rArr; delay
 </UL>
-<BR>[Calls]<UL><LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BLUE_toggle
+<BR>[Calls]<UL><LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MAGENTA_toggle
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> main.o(.constdata)
 </UL>
@@ -1958,7 +1958,7 @@ Local Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = delay
 </UL>
 <BR>[Called By]<UL><LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RED_toggle
-<LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BLUE_toggle
+<LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MAGENTA_toggle
 </UL>
 
 <P><STRONG><a name="[e7]"></a>rt_id2obj</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, rt_cmsis.o(i.rt_id2obj))

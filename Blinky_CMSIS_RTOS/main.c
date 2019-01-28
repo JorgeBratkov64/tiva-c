@@ -9,7 +9,7 @@ void threadRED(void const *argument){
 
 void threadBLUE(void const *argument){
 	while(1){
-		BLUE_toggle();
+		MAGENTA_toggle();
 	}
 }
 
